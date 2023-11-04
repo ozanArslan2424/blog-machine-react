@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
-import { useState } from "react";
 import { Divider } from "@nextui-org/divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,8 @@ import blonca from "../assets/btn/lonca-s.svg";
 import PrintButton from "../components/PrintButton";
 import EnterTextButton from "../components/EnterTextButton";
 
-export default function DefBtnBoard() {
+
+export default function DefBtnBoard({ displayBG }) {
 
     return (
         <Card
@@ -27,16 +28,7 @@ export default function DefBtnBoard() {
         >
             <h1>Kontrol Paneli</h1>
             <Divider />
-
-            <Button
-                variant="flat"
-                color="secondary"
-                radius="sm"
-            >
-                <FontAwesomeIcon icon={faUpload} />
-                Arka Plan Görseli Yükle
-            </Button>
-
+            <UploadButton displayBG={displayBG} />
             <Divider />
 
             <CustomRadio
@@ -147,3 +139,38 @@ const CustomRadio = ({ value1, value2, style1, style2, class1, class2 }) => {
         </div>
     );
 };
+
+const UploadButton = ({ displayBG }) => {
+
+    const handleFileClick = () => {
+        inputRef.current.click();
+    };
+
+    const inputRef = useRef(null);
+
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const imageUrl = e.target.result;
+            displayBG(imageUrl);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    return (
+        <>
+            <input type="file" id="fileInput" accept="image/*" ref={inputRef} style={{ display: "none" }} onChange={handleFileUpload} />
+            <Button
+                variant="flat"
+                color="secondary"
+                radius="sm"
+                className="w-full"
+                onPress={handleFileClick}
+            ><FontAwesomeIcon icon={faUpload} /> Arka Plan Görseli Yükle
+            </Button>
+        </>
+    )
+}

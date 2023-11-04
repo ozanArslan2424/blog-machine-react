@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Image } from "@nextui-org/image";
 import { ThemeSwitcher } from "../components/ThemeSwitch";
 import NavBar from "../components/NavBar";
