@@ -1,32 +1,29 @@
+/* eslint-disable react/prop-types */
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
+import { useState } from "react";
+import { Divider } from "@nextui-org/divider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
+// images
 import wtitle from "../assets/btn/bas-b.svg";
 import btitle from "../assets/btn/bas-s.svg";
 import wtpocg from "../assets/btn/tpocg-b.svg";
 import btpocg from "../assets/btn/tpocg-s.svg";
 import wlonca from "../assets/btn/lonca-b.svg";
 import blonca from "../assets/btn/lonca-s.svg";
-import { useEffect, useState } from "react";
-import { Divider } from "@nextui-org/divider";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
+import PrintButton from "./PrintButton";
+import EnterTextButton from "./EnterTextButton";
 
 export default function DefBtnBoard() {
-    const [pageAmount, setPageAmount] = useState(0);
-
-
-    useEffect(() => {
-        console.log(pageAmount);
-    }, [pageAmount]);
-
 
     return (
         <Card
             radius="sm"
             shadow="sm"
-            className="flex flex-col gap-2 w-min p-4 shrink-0"
+            className="flex flex-col gap-2 w-min h-min p-4 shrink-0"
         >
             <h1>Kontrol Paneli</h1>
             <Divider />
@@ -81,34 +78,11 @@ export default function DefBtnBoard() {
                 placeholder="Yazar"
             />
 
-
-            <Button variant="flat" color="primary" radius="sm">
-                <FontAwesomeIcon icon={faPen} />
-                Metin gir.</Button>
+            <EnterTextButton />
 
             <Divider />
 
-            <div className="flex gap-2">
-                <Input
-                    id="pageAmount"
-                    className="w-1/3"
-                    type="number"
-                    radius="sm"
-                    placeholder="Sayfa Sayısı Gir"
-                    value={pageAmount}
-                    onChange={(e) => setPageAmount(e.target.value)}
-                    min={1}
-                    max={10}
-                />
-                <Button
-                    className="w-2/3"
-                    variant="flat"
-                    color="success"
-                    radius="sm" >
-                    <FontAwesomeIcon icon={faDownload} />
-                    {pageAmount} sayfa yazdır.
-                </Button>
-            </div>
+            <PrintButton />
         </Card>
     )
 }
@@ -124,7 +98,7 @@ const CustomRadio = ({ value1, value2, style1, style2, class1, class2 }) => {
     };
 
     const selectedBorder = "box-border border border-2 border-dotted border-green-600";
-    let cardStyle = "bg-no-repeat bg-center w-36 h-20 hover:cursor-pointer hover:ring-2 hover:ring-zinc-400";
+    let radioButtonStyle = "bg-no-repeat bg-center w-36 h-14 hover:cursor-pointer hover:ring-2 hover:ring-zinc-400";
 
     return (
         <div className="radio-group flex gap-2">
@@ -143,7 +117,7 @@ const CustomRadio = ({ value1, value2, style1, style2, class1, class2 }) => {
                     className=
                     {`${(class1 != null) ? class1 : "bg-zinc-600"} 
                         ${(selectedOption === value1) && selectedBorder} 
-                        ${cardStyle}`}
+                        ${radioButtonStyle}`}
                 ></Card>
             </label>
 
@@ -162,7 +136,7 @@ const CustomRadio = ({ value1, value2, style1, style2, class1, class2 }) => {
                     className=
                     {`${(class2 != null) ? class2 : "bg-zinc-600"} 
                         ${(selectedOption === value2) && selectedBorder} 
-                        ${cardStyle}`}
+                        ${radioButtonStyle}`}
                 ></Card>
             </label>
         </div>
