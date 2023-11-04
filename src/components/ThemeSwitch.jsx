@@ -6,7 +6,7 @@ import { MoonIcon } from "./MoonIcon";
 
 export function ThemeSwitcher() {
     const [mounted, setMounted] = useState(false)
-    const { setTheme } = useTheme()
+    const { setTheme } = useTheme('dark')
 
 
     function switchTheme(e) {
@@ -31,9 +31,9 @@ export function ThemeSwitcher() {
             color="success"
             thumbIcon={({ isSelected, className }) =>
                 isSelected ? (
-                    <SunIcon className={className} />
-                ) : (
                     <MoonIcon className={className} />
+                ) : (
+                    <SunIcon className={className} />
                 )
             }
         >
