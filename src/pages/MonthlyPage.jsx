@@ -1,8 +1,7 @@
-// import AltBtnBoardOne from "../sections/AltBtnBoardOne";
 import Header from "../sections/Header";
 import Previews from "../sections/Previews";
 import HeaderImg2 from "../assets/all/SVG/headerimg2.svg"
-import AltBtnBoard from "../components/AltBtnBoard";
+import AltBtnBoard from "../sections/AltBtnBoard";
 
 
 export default function DefaultPage() {

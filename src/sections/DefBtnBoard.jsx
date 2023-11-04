@@ -14,8 +14,8 @@ import wtpocg from "../assets/btn/tpocg-b.svg";
 import btpocg from "../assets/btn/tpocg-s.svg";
 import wlonca from "../assets/btn/lonca-b.svg";
 import blonca from "../assets/btn/lonca-s.svg";
-import PrintButton from "./PrintButton";
-import EnterTextButton from "./EnterTextButton";
+import PrintButton from "../components/PrintButton";
+import EnterTextButton from "../components/EnterTextButton";
 
 export default function DefBtnBoard() {
 
@@ -28,9 +28,14 @@ export default function DefBtnBoard() {
             <h1>Kontrol Paneli</h1>
             <Divider />
 
-            <Button variant="flat" color="secondary" radius="sm">
+            <Button
+                variant="flat"
+                color="secondary"
+                radius="sm"
+            >
                 <FontAwesomeIcon icon={faUpload} />
-                Arka Plan Görseli Yükle</Button>
+                Arka Plan Görseli Yükle
+            </Button>
 
             <Divider />
 

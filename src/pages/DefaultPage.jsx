@@ -1,7 +1,7 @@
 import Header from "../sections/Header";
 import Previews from "../sections/Previews";
 import HeaderImg1 from "../assets/all/SVG/headerimg1.svg"
-import DefBtnBoard from "../components/DefBtnBoard";
+import DefBtnBoard from "../sections/DefBtnBoard";
 
 
 export default function DefaultPage() {

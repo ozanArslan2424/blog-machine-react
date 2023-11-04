@@ -1,8 +1,8 @@
 import { Switch } from "@nextui-org/switch";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { SunIcon } from "./SunIcon";
-import { MoonIcon } from "./MoonIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 export function ThemeSwitcher() {
     const [mounted, setMounted] = useState(false)
@@ -26,14 +26,15 @@ export function ThemeSwitcher() {
 
     return (
         <Switch
+            className="my-2"
             onChange={switchTheme}
             size="lg"
             color="success"
-            thumbIcon={({ isSelected, className }) =>
+            thumbIcon={({ isSelected }) =>
                 isSelected ? (
-                    <MoonIcon className={className} />
+                    <FontAwesomeIcon icon={faMoon} />
                 ) : (
-                    <SunIcon className={className} />
+                    <FontAwesomeIcon icon={faSun} style={{ color: "#000000", }} />
                 )
             }
         >

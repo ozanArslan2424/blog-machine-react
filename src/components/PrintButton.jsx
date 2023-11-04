@@ -2,15 +2,11 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function PrintButton() {
     const [pageAmount, setPageAmount] = useState(0);
 
-
-    useEffect(() => {
-        console.log(pageAmount);
-    }, [pageAmount]);
 
     return (
         <div className="flex gap-2">

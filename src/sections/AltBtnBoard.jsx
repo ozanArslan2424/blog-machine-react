@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Input } from "@nextui-org/input";
-import PrintButton from "./PrintButton";
-import EnterTextButton from "./EnterTextButton";
+import PrintButton from "../components/PrintButton";
+import EnterTextButton from "../components/EnterTextButton";
 
 export default function AltBtnBoard() {
     return (

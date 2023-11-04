@@ -1,17 +1,15 @@
 import { Image } from "@nextui-org/image";
-import { Button } from "@nextui-org/button";
 import { ThemeSwitcher } from "../components/ThemeSwitch";
 import NavBar from "../components/NavBar";
+import HamburgerMenu from "../components/HamburgerMenu";
 
 export default function Header({ headerImage }) {
 
     return (
         <header className="flex flex-col justify-center items-center gap-2 w-screen pt-2 pb-6">
             <div className="flex items-start justify-between w-screen px-4">
-                <Button
-                    size="sm"
-                    radius="full">
-                </Button>
+                <HamburgerMenu />
+
                 <Image
                     width="800"
                     radius="none"
@@ -19,6 +17,7 @@ export default function Header({ headerImage }) {
                     src={headerImage}
                     className="invert dark:invert-0 px-8"
                 />
+
                 <ThemeSwitcher />
             </div>
             <NavBar />
