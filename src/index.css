@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box !important;
+}
+
 input[type="radio"] {
   display: none;
 }
 
+
+@media (max-width: 768px) {
+  .responsive-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+}

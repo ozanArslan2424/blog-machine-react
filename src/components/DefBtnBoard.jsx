@@ -13,7 +13,7 @@ import { Divider } from "@nextui-org/divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
 
-export default function BtnBoard() {
+export default function DefBtnBoard() {
     const [pageAmount, setPageAmount] = useState(0);
 
 
@@ -29,7 +29,7 @@ export default function BtnBoard() {
             className="flex flex-col gap-2 w-min p-4 shrink-0"
         >
             <h1>Kontrol Paneli</h1>
-            <Divider/>
+            <Divider />
 
             <Button variant="flat" color="secondary" radius="sm">
                 <FontAwesomeIcon icon={faUpload} />

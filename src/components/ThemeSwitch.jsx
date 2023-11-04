@@ -27,7 +27,7 @@ export function ThemeSwitcher() {
     return (
         <Switch
             onChange={switchTheme}
-            size="md"
+            size="lg"
             color="success"
             thumbIcon={({ isSelected, className }) =>
                 isSelected ? (
