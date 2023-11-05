@@ -7,14 +7,19 @@ import { useState } from "react";
 
 export default function DefaultPage() {
     const [uploadedBG, setUploadedBG] = useState(null);
-    console.log(uploadedBG);
+
+    const [selectedValue, setSelectedValue] = useState(null);
+
+    const handleRadioChange = (value) => {
+        setSelectedValue(value);
+    };
 
     return (
         <>
             <Header headerImage={HeaderImg1} />
             <div className="flex responsive-flex justify-center gap-4 px-4 w-screen">
-                <DefBtnBoard displayBG={setUploadedBG}/>
-                <Previews uploadedBG={uploadedBG}/>
+                <DefBtnBoard displayBG={setUploadedBG} selectedValue={selectedValue} onRadioChange={handleRadioChange}/>
+                <Previews uploadedBG={uploadedBG} selectedValue={selectedValue}/>
             </div>
         </>
     )

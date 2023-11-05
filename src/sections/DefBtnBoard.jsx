@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@nextui-org/button";
+import { useRef } from "react";
+import { Button, ButtonGroup } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import { Divider } from "@nextui-org/divider";
@@ -18,46 +18,31 @@ import PrintButton from "../components/PrintButton";
 import EnterTextButton from "../components/EnterTextButton";
 
 
-export default function DefBtnBoard({ displayBG }) {
+export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange }) {
+
 
     return (
-        <Card
-            radius="sm"
-            shadow="sm"
-            className="flex flex-col gap-2 w-min h-min p-4 shrink-0"
-        >
+        <Card radius="sm" shadow="sm" className="flex flex-col gap-2 w-min h-min p-4 shrink-0" >
             <h1>Kontrol Paneli</h1>
+
             <Divider />
+
             <UploadButton displayBG={displayBG} />
+
             <Divider />
 
-            <CustomRadio
-                value1="whitebg"
-                value2="blackbg"
-                class1="bg-white"
-                class2="bg-black"
-                variant="bordered" />
-
-            <CustomRadio
-                value1="whitetitle"
-                value2="blacktitle"
-                style1={wtitle}
-                style2={btitle}
-                variant="flat" />
-
-            <CustomRadio
-                value1="whitetpocg"
-                value2="blacktpocg"
-                style1={wtpocg}
-                style2={btpocg}
-                variant="flat" />
-
-            <CustomRadio
-                value1="whitelonca"
-                value2="blacklonca"
-                style1={wlonca}
-                style2={blonca}
-                variant="flat" />
+            <CustomRadioButton
+                selectedValue={selectedValue} onRadioChange={onRadioChange}
+                optionName="bg" class1="bg-white" class2="bg-black" />
+            <CustomRadioButton
+                selectedValue={selectedValue} onRadioChange={onRadioChange}
+                optionName="title" image1={wtitle} image2={btitle} />
+            <CustomRadioButton
+                selectedValue={selectedValue} onRadioChange={onRadioChange}
+                optionName="tpocg" image1={wtpocg} image2={btpocg} />
+            <CustomRadioButton
+                selectedValue={selectedValue} onRadioChange={onRadioChange}
+                optionName="lonca" image1={wlonca} image2={blonca} />
 
             <Divider />
 
@@ -65,15 +50,13 @@ export default function DefBtnBoard({ displayBG }) {
                 type="text"
                 variant="bordered"
                 radius="sm"
-                placeholder="Başlık"
-            />
+                placeholder="Başlık" />
 
             <Input
                 type="text"
                 variant="bordered"
                 radius="sm"
-                placeholder="Yazar"
-            />
+                placeholder="Yazar" />
 
             <EnterTextButton />
 
@@ -83,62 +66,6 @@ export default function DefBtnBoard({ displayBG }) {
         </Card>
     )
 }
-
-
-
-
-const CustomRadio = ({ value1, value2, style1, style2, class1, class2 }) => {
-    const [selectedOption, setSelectedOption] = useState(null);
-
-    const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value);
-    };
-
-    const selectedBorder = "box-border border border-2 border-dotted border-green-600";
-    let radioButtonStyle = "bg-no-repeat bg-center w-36 h-14 hover:cursor-pointer hover:ring-2 hover:ring-zinc-400";
-
-    return (
-        <div className="radio-group flex gap-2">
-            <input
-                id={value1}
-                type="radio"
-                value={value1}
-                checked={selectedOption === value1}
-                onChange={handleOptionChange}
-            />
-            <label htmlFor={value1}>
-                <Card
-                    radius="sm"
-                    shadow="sm"
-                    style={{ backgroundImage: `url(${style1})` }}
-                    className=
-                    {`${(class1 != null) ? class1 : "bg-zinc-600"} 
-                        ${(selectedOption === value1) && selectedBorder} 
-                        ${radioButtonStyle}`}
-                ></Card>
-            </label>
-
-            <input
-                id={value2}
-                type="radio"
-                value={value2}
-                checked={selectedOption === value2}
-                onChange={handleOptionChange}
-            />
-            <label htmlFor={value2}>
-                <Card
-                    radius="sm"
-                    shadow="sm"
-                    style={{ backgroundImage: `url(${style2})` }}
-                    className=
-                    {`${(class2 != null) ? class2 : "bg-zinc-600"} 
-                        ${(selectedOption === value2) && selectedBorder} 
-                        ${radioButtonStyle}`}
-                ></Card>
-            </label>
-        </div>
-    );
-};
 
 const UploadButton = ({ displayBG }) => {
 
@@ -168,9 +95,39 @@ const UploadButton = ({ displayBG }) => {
                 color="secondary"
                 radius="sm"
                 className="w-full"
-                onPress={handleFileClick}
-            ><FontAwesomeIcon icon={faUpload} /> Arka Plan Görseli Yükle
+                onPress={handleFileClick} >
+                <FontAwesomeIcon icon={faUpload} />
+                Arka Plan Görseli Yükle
             </Button>
         </>
     )
+}
+
+const CustomRadioButton = ({ optionName, class1, class2, image1, image2, selectedValue, onRadioChange }) => {
+
+    let radioButtonStyle = "bg-no-repeat bg-center w-36 h-14 hover:cursor-pointer hover:ring-2 hover:ring-zinc-400";
+    const selectedBorder = "border border-1 border-green-600 ";
+
+    return (
+        <ButtonGroup radius="sm" shadow="sm" disableRipple>
+            <Button
+                onClick={() => {
+                    const newValue = `${optionName} white`;
+                    onRadioChange(newValue);
+                }}
+                style={{ backgroundImage: `url(${image1})` }}
+                className={`${class1} ${radioButtonStyle}` + (selectedValue === `${optionName} white` && selectedBorder)}
+            >
+            </Button>
+            <Button
+                onClick={() => {
+                    const newValue = `${optionName} black`;
+                    onRadioChange(newValue);
+                }} style={{ backgroundImage: `url(${image2})` }}
+                className={`${class2} ${radioButtonStyle}` + (selectedValue === `${optionName} black` && selectedBorder)}
+            >
+            </Button>
+        </ButtonGroup>
+    );
+
 }
