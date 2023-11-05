@@ -21,17 +21,17 @@ const imageMap = {
     'lonca white': whiteLonca,
 };
 
-export default function Previews({ uploadedBG, selectedValue, baslik, yazar }) {
-    
+export default function Previews({ selectedBG, selectedValue, baslik, yazar }) {
+
     return (
         <Card radius="sm" shadow="sm" className="flex flex-col gap-4 w-min p-4">
-            <CoverPreviewCell uploadedBG={uploadedBG} selectedValue={selectedValue} baslik={baslik} yazar={yazar} />
-            <OtherPreviewCell uploadedBG={uploadedBG} selectedValue={selectedValue} />
+            <CoverPreviewCell selectedBG={selectedBG} selectedValue={selectedValue} baslik={baslik} yazar={yazar} />
+            <OtherPreviewCell selectedBG={selectedBG} selectedValue={selectedValue} />
         </Card>
     );
 }
 
-const CoverPreviewCell = ({ selectedValue, uploadedBG, baslik, yazar }) => {
+const CoverPreviewCell = ({ selectedValue, selectedBG, baslik, yazar }) => {
 
     const [selectedImages, setSelectedImages] = useState([]);
 
@@ -56,7 +56,7 @@ const CoverPreviewCell = ({ selectedValue, uploadedBG, baslik, yazar }) => {
     return (
         <Card radius="sm" shadow="sm" className="bg-white w-[430px] h-[500px]">
             {/* 1st layer: background image*/}
-            <img src={uploadedBG} className={placement} />
+            <img src={selectedBG} className={placement} />
             {/* 2nd 3rd 4th layers: title back, logo1, logo2 */}
             {selectedImages.map((image, index) => (
                 <img src={image} className={placement} key={index} />
@@ -70,24 +70,29 @@ const CoverPreviewCell = ({ selectedValue, uploadedBG, baslik, yazar }) => {
     )
 }
 
-const OtherPreviewCell = ({ selectedValue, uploadedBG }) => {
-    const [selectedBackground, setSelectedBackground] = useState(null);
+const OtherPreviewCell = ({ selectedValue, selectedBG }) => {
+    const [textBG, setTextBG] = useState(null);
 
     useEffect(() => {
         if (selectedValue && selectedValue.includes('bg')) {
-            setSelectedBackground(imageMap[selectedValue]);
+            setTextBG(imageMap[selectedValue]);
         }
     }, [selectedValue]);
+
 
     const placement = 'absolute z-auto h-full w-full';
     return (
         <Card radius="sm" shadow="sm" className="bg-white w-[430px] h-[500px]">
             {/* 1st layer: background image*/}
-            <img src={uploadedBG} className={placement} />
+            <img src={selectedBG} className={placement} />
             {/* 2nd layer: text color*/}
-            {selectedBackground && <img src={selectedBackground} className={placement} />}
+            {textBG && <img src={textBG} className={placement} />}
             {/* 3rd layer: text */}
-            <div contentEditable className="z-10 py-6 px-7 max-h-full overflow-scroll arial-font">text placeholder</div>
+            <div
+                contentEditable
+                className={`z-10 py-6 px-7 max-h-full overflow-scroll arial-font ${textBG == blackBG ? "text-white" : "text-black"}`}>
+                text placeholder
+            </div>
         </Card>
     )
 }

@@ -18,7 +18,7 @@ import PrintButton from "../components/PrintButton";
 import EnterTextButton from "../components/EnterTextButton";
 
 
-export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange, onBaslikChange, onYazarChange }) {
+export default function DefBtnBoard({ uploadBG, selectedValue, onRadioChange, onBaslikChange, onYazarChange }) {
 
     return (
         <Card radius="sm" shadow="sm" className="flex flex-col gap-2 w-min h-min p-4 shrink-0" >
@@ -26,7 +26,7 @@ export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange, o
 
             <Divider />
 
-            <UploadButton displayBG={displayBG} />
+            <UploadButton uploadBG={uploadBG} />
 
             <Divider />
 
@@ -80,7 +80,7 @@ export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange, o
     )
 }
 
-const UploadButton = ({ displayBG }) => {
+const UploadButton = ({ uploadBG }) => {
 
     const handleFileClick = () => {
         inputRef.current.click();
@@ -94,7 +94,7 @@ const UploadButton = ({ displayBG }) => {
 
         reader.onload = function (e) {
             const imageUrl = e.target.result;
-            displayBG(imageUrl);
+            uploadBG(imageUrl);
         };
 
         reader.readAsDataURL(file);
