@@ -21,44 +21,51 @@ const imageMap = {
     'lonca white': whiteLonca,
 };
 
-export default function Previews({ uploadedBG, selectedValue }) {
-
+export default function Previews({ uploadedBG, selectedValue, baslik, yazar }) {
+    
     return (
         <Card radius="sm" shadow="sm" className="flex flex-col gap-4 w-min p-4">
-            <CoverPreviewCell uploadedBG={uploadedBG} selectedValue={selectedValue} />
+            <CoverPreviewCell uploadedBG={uploadedBG} selectedValue={selectedValue} baslik={baslik} yazar={yazar} />
             <OtherPreviewCell uploadedBG={uploadedBG} selectedValue={selectedValue} />
         </Card>
     );
 }
 
-const CoverPreviewCell = ({ selectedValue, uploadedBG }) => {
+const CoverPreviewCell = ({ selectedValue, uploadedBG, baslik, yazar }) => {
 
     const [selectedImages, setSelectedImages] = useState([]);
 
     useEffect(() => {
         if (selectedValue) {
-            // Exclude "bg" item from selected images
-            if (!selectedValue.startsWith('bg')) {
-                setSelectedImages((prevSelectedImages) => [
-                    ...prevSelectedImages.filter((image) => !image.includes('bg')),
-                    imageMap[selectedValue],
-                ]);
-            } else {
-                setSelectedImages((prevSelectedImages) => [
-                    ...prevSelectedImages.filter((image) => !image.includes('bg')),
-                ]);
-            }
+            const category = selectedValue.split(' ')[0];
+            setSelectedImages((prevSelectedImages) => {
+                const updatedImages = prevSelectedImages.filter(
+                    (image) => !image.includes(category)
+                );
+                if (!selectedValue.startsWith('bg')) {
+                    updatedImages.push(imageMap[selectedValue]);
+                }
+                return updatedImages;
+            });
         }
     }, [selectedValue]);
+
 
     const placement = 'absolute z-auto h-full w-full';
 
     return (
         <Card radius="sm" shadow="sm" className="bg-white w-[430px] h-[500px]">
+            {/* 1st layer: background image*/}
             <img src={uploadedBG} className={placement} />
+            {/* 2nd 3rd 4th layers: title back, logo1, logo2 */}
             {selectedImages.map((image, index) => (
                 <img src={image} className={placement} key={index} />
             ))}
+            {/* 5th layer: title text */}
+            <span className="z-10 mt-[27px] ml-28 mr-4 text-center cronus-font text-[22px]">{baslik}</span>
+            {/* 6th layer: author text */}
+            <span className="z-10 mt-[15px] ml-56 mr-5 text-center cronus-font">{yazar}</span>
+
         </Card>
     )
 }
@@ -75,8 +82,12 @@ const OtherPreviewCell = ({ selectedValue, uploadedBG }) => {
     const placement = 'absolute z-auto h-full w-full';
     return (
         <Card radius="sm" shadow="sm" className="bg-white w-[430px] h-[500px]">
+            {/* 1st layer: background image*/}
             <img src={uploadedBG} className={placement} />
+            {/* 2nd layer: text color*/}
             {selectedBackground && <img src={selectedBackground} className={placement} />}
+            {/* 3rd layer: text */}
+            <div contentEditable className="z-10 py-6 px-7 max-h-full overflow-scroll arial-font">text placeholder</div>
         </Card>
     )
 }

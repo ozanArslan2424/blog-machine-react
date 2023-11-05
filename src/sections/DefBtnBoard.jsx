@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
@@ -18,8 +18,7 @@ import PrintButton from "../components/PrintButton";
 import EnterTextButton from "../components/EnterTextButton";
 
 
-export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange }) {
-
+export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange, onBaslikChange, onYazarChange }) {
 
     return (
         <Card radius="sm" shadow="sm" className="flex flex-col gap-2 w-min h-min p-4 shrink-0" >
@@ -32,17 +31,29 @@ export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange })
             <Divider />
 
             <CustomRadioButton
-                selectedValue={selectedValue} onRadioChange={onRadioChange}
-                optionName="bg" class1="bg-white" class2="bg-black" />
+                selectedValue={selectedValue}
+                onRadioChange={onRadioChange}
+                optionName="bg"
+                class1="bg-white"
+                class2="bg-black" />
             <CustomRadioButton
-                selectedValue={selectedValue} onRadioChange={onRadioChange}
-                optionName="title" image1={wtitle} image2={btitle} />
+                selectedValue={selectedValue}
+                onRadioChange={onRadioChange}
+                optionName="title"
+                image1={wtitle}
+                image2={btitle} />
             <CustomRadioButton
-                selectedValue={selectedValue} onRadioChange={onRadioChange}
-                optionName="tpocg" image1={wtpocg} image2={btpocg} />
+                selectedValue={selectedValue}
+                onRadioChange={onRadioChange}
+                optionName="tpocg"
+                image1={wtpocg}
+                image2={btpocg} />
             <CustomRadioButton
-                selectedValue={selectedValue} onRadioChange={onRadioChange}
-                optionName="lonca" image1={wlonca} image2={blonca} />
+                selectedValue={selectedValue}
+                onRadioChange={onRadioChange}
+                optionName="lonca"
+                image1={wlonca}
+                image2={blonca} />
 
             <Divider />
 
@@ -50,13 +61,15 @@ export default function DefBtnBoard({ displayBG, selectedValue, onRadioChange })
                 type="text"
                 variant="bordered"
                 radius="sm"
-                placeholder="Başlık" />
+                placeholder="Başlık"
+                onValueChange={onBaslikChange} />
 
             <Input
                 type="text"
                 variant="bordered"
                 radius="sm"
-                placeholder="Yazar" />
+                placeholder="Yazar"
+                onValueChange={onYazarChange} />
 
             <EnterTextButton />
 

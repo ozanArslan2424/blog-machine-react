@@ -13,3 +13,11 @@
     align-items: center;
   }
 }
+
+.cronus-font {
+  font-family: "Cronus Round" !important;
+}
+
+.arial-font {
+  font-family: Arial !important;
+}
