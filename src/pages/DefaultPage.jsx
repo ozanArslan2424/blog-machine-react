@@ -2,7 +2,7 @@ import Header from "../sections/Header";
 import Previews from "../sections/Previews";
 import HeaderImg1 from "../assets/all/SVG/headerimg1.svg"
 import DefBtnBoard from "../sections/DefBtnBoard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 export default function DefaultPage() {
@@ -10,6 +10,8 @@ export default function DefaultPage() {
     const [selectedValue, setSelectedValue] = useState(null);
     const [baslik, setBaslik] = useState("");
     const [yazar, setYazar] = useState("");
+    const [pageAmount, setPageAmount] = useState(0);
+
 
     const handleRadioChange = (value) => {
         setSelectedValue(value);
@@ -22,6 +24,9 @@ export default function DefaultPage() {
     function handleYazarChange(value) {
         setYazar(value);
     }
+    function handlePageAmountChange(value) {
+        setPageAmount(value);
+    }
 
     return (
         <>
@@ -32,9 +37,10 @@ export default function DefaultPage() {
                 <DefBtnBoard
                     uploadBG={setSelectedBG}
                     onRadioChange={handleRadioChange}
-                    selectedValue={selectedValue}
                     onBaslikChange={handleBaslikChange}
                     onYazarChange={handleYazarChange}
+                    onPageAmountChange={handlePageAmountChange}
+                    pageAmount={pageAmount}
                 />
 
                 <Previews

@@ -19,19 +19,22 @@ export default function HamburgerMenu() {
 
                 <DropdownItem
                     aria-label="TPÖÇG Web Sitesi"
-                    key="site">
+                    key="site"
+                    href="https://www.tpocg.org">
                     TPÖÇG Web
                 </DropdownItem>
 
                 <DropdownItem
                     aria-label="PsiNossa Dergi"
-                    key="dergi">
+                    key="dergi"
+                    href="http://psinossa.tpocg.org">
                     PsiNossa Dergi
                 </DropdownItem>
 
                 <DropdownItem
                     aria-label="Akıl Defterim Blog"
-                    key="blog">
+                    key="blog"
+                    href="https://www.tpocg.org/blog/category/blog">
                     Akıl Defterim Blog
                 </DropdownItem>
 

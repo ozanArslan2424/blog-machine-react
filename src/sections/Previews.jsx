@@ -9,6 +9,9 @@ import whiteTpocg from '../assets/all/PNG/wtpocg-prev.png';
 import blackTpocg from '../assets/all/PNG/btpocg-prev.png';
 import whiteLonca from '../assets/all/PNG/wlon-prev.png';
 import blackLonca from '../assets/all/PNG/blon-prev.png';
+import { Button } from '@nextui-org/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAdd } from '@fortawesome/free-solid-svg-icons';
 
 const imageMap = {
     'bg black': blackBG,
@@ -21,12 +24,32 @@ const imageMap = {
     'lonca white': whiteLonca,
 };
 
+
 export default function Previews({ selectedBG, selectedValue, baslik, yazar }) {
+    const [otherCellCount, setOtherCellCount] = useState(1);
+
+    const handleAddNewCell = () => {
+        setOtherCellCount(otherCellCount + 1);
+    };
 
     return (
-        <Card radius="sm" shadow="sm" className="flex flex-col gap-4 w-min p-4">
-            <CoverPreviewCell selectedBG={selectedBG} selectedValue={selectedValue} baslik={baslik} yazar={yazar} />
-            <OtherPreviewCell selectedBG={selectedBG} selectedValue={selectedValue} />
+        <Card radius="sm" shadow="sm" className="flex flex-row flex-wrap gap-4 p-4 max-w-[908px]">
+            <CoverPreviewCell
+                selectedBG={selectedBG}
+                selectedValue={selectedValue}
+                baslik={baslik}
+                yazar={yazar}
+            />
+            {[...Array(otherCellCount)].map((_, index) => (
+                <OtherPreviewCell
+                    key={index}
+                    selectedBG={selectedBG}
+                    selectedValue={selectedValue}
+                />
+            ))}
+            <Button disableRipple onClick={handleAddNewCell} radius="full" color="primary" className="w-[430px]">
+                <FontAwesomeIcon icon={faAdd} size="lg" />
+            </Button>
         </Card>
     );
 }

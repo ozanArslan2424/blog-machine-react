@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Input } from "@nextui-org/input";
 import PrintButton from "../components/PrintButton";
-import EnterTextButton from "../components/EnterTextButton";
 
 export default function AltBtnBoard() {
     return (
@@ -21,7 +20,10 @@ export default function AltBtnBoard() {
             <CustomInput fileType="Oku" />
             <CustomInput fileType="Dinle" />
             <CustomInput fileType="İzle" />
-            <EnterTextButton />
+            <Button variant="flat" color="primary" radius="sm">
+                <FontAwesomeIcon icon={faPen} />
+                Metin gir.
+            </Button>
             <Divider />
             <PrintButton />
         </Card>
