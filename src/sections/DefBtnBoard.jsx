@@ -22,7 +22,6 @@ export default function DefBtnBoard({
     onBaslikChange,
     onYazarChange,
     onFocusClick,
-    addedCellCount,
     onGenerateImages, }) {
 
     return (
@@ -72,11 +71,11 @@ export default function DefBtnBoard({
                 placeholder="Yazar"
                 onValueChange={onYazarChange} />
 
-            <Button 
-            variant="flat" 
-            color="primary" 
-            radius="sm"
-            onPress={onFocusClick}>
+            <Button
+                variant="flat"
+                color="primary"
+                radius="sm"
+                onPress={onFocusClick}>
                 <FontAwesomeIcon icon={faPen} />
                 Metin gir.
             </Button>
@@ -97,18 +96,13 @@ export default function DefBtnBoard({
 }
 
 const UploadButton = ({ uploadBG }) => {
-
-    const handleFileClick = () => {
-        inputRef.current.click();
-    };
-
     const inputRef = useRef(null);
 
-    function handleFileUpload(event) {
+    const handleFileUpload = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
 
-        reader.onload = function (e) {
+        reader.onload = (e) => {
             const imageUrl = e.target.result;
             uploadBG(imageUrl);
         };
@@ -124,7 +118,7 @@ const UploadButton = ({ uploadBG }) => {
                 color="secondary"
                 radius="sm"
                 className="w-full"
-                onPress={handleFileClick} >
+                onPress={() => inputRef.current.click()} >
                 <FontAwesomeIcon icon={faUpload} />
                 Arka Plan Görseli Yükle
             </Button>

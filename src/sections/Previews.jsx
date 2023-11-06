@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { Card } from '@nextui-org/card';
-// import { Button } from '@nextui-org/react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faAdd } from '@fortawesome/free-solid-svg-icons';
 
 // images
 import blackBG from '../assets/all/PNG/blackbg-prev.png';
@@ -16,7 +13,6 @@ import whiteLonca from '../assets/all/PNG/wlon-prev.png';
 import blackLonca from '../assets/all/PNG/blon-prev.png';
 import { toJpeg } from 'html-to-image';
 
-
 const imageMap = {
     'bg black': blackBG,
     'bg white': whiteBG,
@@ -28,27 +24,33 @@ const imageMap = {
     'lonca white': whiteLonca,
 };
 
+const placement = 'absolute z-auto h-full w-full';
+
 const Previews = forwardRef((
-    { selectedBG, selectedValue, baslik, yazar, addedCellCount },
+    { selectedBG, selectedValue, baslik, yazar },
     ref) => {
 
     const generateImages = () => {
-        const nodes = printCellRefs.current
-        console.log(nodes);
-        Array.from(nodes).forEach((node) => {
+        const nodes = printCellRefs.current;
+    
+        const promises = Array.from(nodes).map((node, index) =>
             toJpeg(node, { quality: 1 })
-                .then((dataUrl) => {
-                    const link = document.createElement('a');
-                    link.download = 'blog.jpeg';
-                    link.href = dataUrl;
-                    link.click();
-                })
+                .then((dataUrl) => ({ dataUrl, index }))
                 .catch((error) => {
                     console.error('oops, something went wrong!', error);
+                })
+        );
+    
+        Promise.all(promises)
+            .then((results) => {
+                results.forEach(({ dataUrl, index }) => {
+                    const link = document.createElement('a');
+                    link.download = `blog_${index}.jpeg`;
+                    link.href = dataUrl;
+                    link.click();
                 });
-        });
+            });
     };
-
     useImperativeHandle(ref, () => ({
         generateImages,
     }));
@@ -56,8 +58,8 @@ const Previews = forwardRef((
     const printCellRefs = useRef([]);
 
     useEffect(() => {
-        printCellRefs.current = printCellRefs.current.slice(0, 1); //take a look at this line
-    }, [addedCellCount]);
+        printCellRefs.current = printCellRefs.current.slice(0, 6); //take a look at this line
+    }, []);
 
     return (
         <Card
@@ -69,21 +71,7 @@ const Previews = forwardRef((
             <OtherPreviewCell ref={(el) => printCellRefs.current[2] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
             <OtherPreviewCell ref={(el) => printCellRefs.current[3] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
             <OtherPreviewCell ref={(el) => printCellRefs.current[4] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
-
-            {/* ÇALIŞMIYOR MAALESEF */}
-            {/* {[...Array(addedCellCount)].map((_, index) => (
-                <OtherPreviewCell
-                    ref={(el) => printCellRefs.current[index + 1] = el}
-                    className="print-cell"
-                    key={index}
-                    selectedBG={selectedBG}
-                    selectedValue={selectedValue}
-                />
-            ))}
-            <Button disableRipple onClick={onAddNewCell} radius="full" color="primary" className="w-[430px]">
-                <FontAwesomeIcon icon={faAdd} size="lg" />
-            </Button> */}
-            {/* ÇALIŞMIYOR MAALESEF */}
+            <OtherPreviewCell ref={(el) => printCellRefs.current[5] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
 
         </Card>
     );
@@ -113,9 +101,6 @@ const CoverPreviewCell = forwardRef((
         }
     }, [selectedValue]);
 
-
-    const placement = 'absolute z-auto h-full w-full';
-
     return (
         <Card ref={ref} radius="sm" shadow="sm" className="bg-white w-[430px] h-[500px]">
             {/* 1st layer: background image*/}
@@ -135,10 +120,7 @@ const CoverPreviewCell = forwardRef((
 
 CoverPreviewCell.displayName = 'CoverPreviewCell';
 
-const OtherPreviewCell = forwardRef((
-    { selectedValue, selectedBG, },
-    ref) => {
-
+const OtherPreviewCell = forwardRef(({ selectedValue, selectedBG }, ref) => {
     const [textBG, setTextBG] = useState(null);
 
     useEffect(() => {
@@ -147,7 +129,8 @@ const OtherPreviewCell = forwardRef((
         }
     }, [selectedValue]);
 
-    const placement = 'absolute z-auto h-full w-full';
+    const defaultValue = useMemo(() => "Buraya metin girin.", []);
+
     return (
         <Card ref={ref} radius="sm" shadow="sm" className="bg-white w-[430px] h-[500px]">
             {/* 1st layer: background image*/}
@@ -157,8 +140,8 @@ const OtherPreviewCell = forwardRef((
             {/* 3rd layer: text */}
             <textarea
                 className={`z-10 py-6 px-7 h-full overflow-scroll arial-font bg-transparent ${textBG == blackBG ? "text-white" : "text-black"}`}
-                defaultValue="Buraya metin girin."
-                >
+                defaultValue={defaultValue}
+            >
             </textarea>
         </Card>
     );

@@ -5,52 +5,35 @@ import DefBtnBoard from "../sections/DefBtnBoard";
 import { useRef, useState } from "react";
 
 export default function DefaultPage() {
-    const [selectedBG, setSelectedBG] = useState(null);
-    const [selectedValue, setSelectedValue] = useState(null);
-    const [baslik, setBaslik] = useState("");
-    const [yazar, setYazar] = useState("");
-    // const [addedCellCount, setAddedCellCount] = useState(1);
+    const [state, setState] = useState({
+        selectedBG: null,
+        selectedValue: null,
+        baslik: "",
+        yazar: "",
+    });
     const previewsRef = useRef();
 
-    function handleRadioChange(value) {
-        setSelectedValue(value);
-    }
-
-    function handleBaslikChange(value) {
-        setBaslik(value);
-    }
-
-    function handleYazarChange(value) {
-        setYazar(value);
-    }
-
-    // function handleAddNewCell() {
-    //     setAddedCellCount((prevCount) => prevCount + 1);
-    // }
-
-    function handleGenerateImages() {
-        previewsRef.current.generateImages();
-    }
+    const handleRadioChange = (value) => setState(prevState => ({ ...prevState, selectedValue: value }));
+    const handleBaslikChange = (value) => setState(prevState => ({ ...prevState, baslik: value }));
+    const handleYazarChange = (value) => setState(prevState => ({ ...prevState, yazar: value }));
+    const handleGenerateImages = () => previewsRef.current.generateImages();
 
     return (
         <>
             <Header headerImage={HeaderImg1} />
             <div className="flex responsive-flex justify-center gap-4 px-4 w-screen">
                 <DefBtnBoard
-                    uploadBG={setSelectedBG}
+                    uploadBG={(bg) => setState(prevState => ({ ...prevState, selectedBG: bg }))}
                     onRadioChange={handleRadioChange}
                     onBaslikChange={handleBaslikChange}
                     onYazarChange={handleYazarChange}
-                    // addedCellCount={addedCellCount}
                     onGenerateImages={handleGenerateImages}
                 />
                 <Previews
-                    selectedBG={selectedBG}
-                    selectedValue={selectedValue}
-                    baslik={baslik}
-                    yazar={yazar}
-                    // onAddNewCell={handleAddNewCell}
-                    // addedCellCount={addedCellCount}
+                    selectedBG={state.selectedBG}
+                    selectedValue={state.selectedValue}
+                    baslik={state.baslik}
+                    yazar={state.yazar}
                     ref={previewsRef}
                 />
             </div>
