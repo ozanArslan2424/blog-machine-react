@@ -9,7 +9,8 @@ export default function DefaultPage() {
     const [selectedValue, setSelectedValue] = useState(null);
     const [baslik, setBaslik] = useState("");
     const [yazar, setYazar] = useState("");
-    const [addedCellCount, setAddedCellCount] = useState(1);
+    // const [addedCellCount, setAddedCellCount] = useState(1);
+    const previewsRef = useRef();
 
     function handleRadioChange(value) {
         setSelectedValue(value);
@@ -23,11 +24,9 @@ export default function DefaultPage() {
         setYazar(value);
     }
 
-    function handleAddNewCell() {
-        setAddedCellCount((prevCount) => prevCount + 1);
-    }
-
-    const previewsRef = useRef();
+    // function handleAddNewCell() {
+    //     setAddedCellCount((prevCount) => prevCount + 1);
+    // }
 
     function handleGenerateImages() {
         previewsRef.current.generateImages();
@@ -42,7 +41,7 @@ export default function DefaultPage() {
                     onRadioChange={handleRadioChange}
                     onBaslikChange={handleBaslikChange}
                     onYazarChange={handleYazarChange}
-                    addedCellCount={addedCellCount}
+                    // addedCellCount={addedCellCount}
                     onGenerateImages={handleGenerateImages}
                 />
                 <Previews
@@ -50,8 +49,8 @@ export default function DefaultPage() {
                     selectedValue={selectedValue}
                     baslik={baslik}
                     yazar={yazar}
-                    onAddNewCell={handleAddNewCell}
-                    addedCellCount={addedCellCount}
+                    // onAddNewCell={handleAddNewCell}
+                    // addedCellCount={addedCellCount}
                     ref={previewsRef}
                 />
             </div>

@@ -26,6 +26,9 @@ export function ThemeSwitcher() {
 
     return (
         <Switch
+            id="theme-switcher"
+            name="theme-switcher"
+            aria-labelledby="theme-switcher"
             className="my-2"
             onChange={switchTheme}
             size="lg"

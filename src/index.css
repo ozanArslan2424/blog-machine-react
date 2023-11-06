@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Cronus";
+  src: url("../public/Cronus Round.otf") format('truetype');
+}
+
 * {
   box-sizing: border-box !important;
 }
@@ -15,7 +20,7 @@
 }
 
 .cronus-font {
-  font-family: "Cronus Round" !important;
+  font-family: "Cronus" !important;
 }
 
 .arial-font {

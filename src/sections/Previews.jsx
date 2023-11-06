@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Card } from '@nextui-org/card';
-import { Button } from '@nextui-org/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd } from '@fortawesome/free-solid-svg-icons';
+// import { Button } from '@nextui-org/react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faAdd } from '@fortawesome/free-solid-svg-icons';
+
 // images
 import blackBG from '../assets/all/PNG/blackbg-prev.png';
 import whiteBG from '../assets/all/PNG/whitebg-prev.png';
@@ -28,7 +29,7 @@ const imageMap = {
 };
 
 const Previews = forwardRef((
-    { selectedBG, selectedValue, baslik, yazar, onAddNewCell, addedCellCount },
+    { selectedBG, selectedValue, baslik, yazar, addedCellCount },
     ref) => {
 
     const generateImages = () => {
@@ -55,7 +56,7 @@ const Previews = forwardRef((
     const printCellRefs = useRef([]);
 
     useEffect(() => {
-        printCellRefs.current = printCellRefs.current.slice(0, addedCellCount + 1);
+        printCellRefs.current = printCellRefs.current.slice(0, 1); //take a look at this line
     }, [addedCellCount]);
 
     return (
@@ -63,15 +64,14 @@ const Previews = forwardRef((
             radius="sm"
             shadow="sm"
             className="flex flex-row flex-wrap gap-4 p-4 max-w-[908px]">
-            <CoverPreviewCell
-                ref={(el) => printCellRefs.current[0] = el}
-                className="print-cell"
-                selectedBG={selectedBG}
-                selectedValue={selectedValue}
-                baslik={baslik}
-                yazar={yazar}
-            />
-            {[...Array(addedCellCount)].map((_, index) => (
+            <CoverPreviewCell ref={(el) => printCellRefs.current[0] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} baslik={baslik} yazar={yazar} />
+            <OtherPreviewCell ref={(el) => printCellRefs.current[1] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
+            <OtherPreviewCell ref={(el) => printCellRefs.current[2] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
+            <OtherPreviewCell ref={(el) => printCellRefs.current[3] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
+            <OtherPreviewCell ref={(el) => printCellRefs.current[4] = el} className="print-cell" selectedBG={selectedBG} selectedValue={selectedValue} />
+
+            {/* ÇALIŞMIYOR MAALESEF */}
+            {/* {[...Array(addedCellCount)].map((_, index) => (
                 <OtherPreviewCell
                     ref={(el) => printCellRefs.current[index + 1] = el}
                     className="print-cell"
@@ -82,7 +82,9 @@ const Previews = forwardRef((
             ))}
             <Button disableRipple onClick={onAddNewCell} radius="full" color="primary" className="w-[430px]">
                 <FontAwesomeIcon icon={faAdd} size="lg" />
-            </Button>
+            </Button> */}
+            {/* ÇALIŞMIYOR MAALESEF */}
+
         </Card>
     );
 });
@@ -153,11 +155,11 @@ const OtherPreviewCell = forwardRef((
             {/* 2nd layer: text color*/}
             {textBG && <img src={textBG} className={placement} />}
             {/* 3rd layer: text */}
-            <div
-                // contentEditable
-                className={`z-10 py-6 px-7 max-h-full overflow-scroll arial-font ${textBG == blackBG ? "text-white" : "text-black"}`}>
-                text placeholder
-            </div>
+            <textarea
+                className={`z-10 py-6 px-7 h-full overflow-scroll arial-font bg-transparent ${textBG == blackBG ? "text-white" : "text-black"}`}
+                defaultValue="Buraya metin girin."
+                >
+            </textarea>
         </Card>
     );
 });

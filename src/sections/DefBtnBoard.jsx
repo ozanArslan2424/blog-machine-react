@@ -21,6 +21,7 @@ export default function DefBtnBoard({
     onRadioChange,
     onBaslikChange,
     onYazarChange,
+    onFocusClick,
     addedCellCount,
     onGenerateImages, }) {
 
@@ -71,7 +72,11 @@ export default function DefBtnBoard({
                 placeholder="Yazar"
                 onValueChange={onYazarChange} />
 
-            <Button variant="flat" color="primary" radius="sm">
+            <Button 
+            variant="flat" 
+            color="primary" 
+            radius="sm"
+            onPress={onFocusClick}>
                 <FontAwesomeIcon icon={faPen} />
                 Metin gir.
             </Button>
@@ -85,7 +90,7 @@ export default function DefBtnBoard({
                 onPress={onGenerateImages}
             >
                 <FontAwesomeIcon icon={faDownload} />
-                {addedCellCount + 1} sayfa yazdır.
+                Bütün sayfaları yazdır.
             </Button>
         </Card>
     )
