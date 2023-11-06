@@ -5,7 +5,7 @@ import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import { Divider } from "@nextui-org/divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 // images
 import wtitle from "../assets/btn/bas-b.svg";
@@ -14,11 +14,10 @@ import wtpocg from "../assets/btn/tpocg-b.svg";
 import btpocg from "../assets/btn/tpocg-s.svg";
 import wlonca from "../assets/btn/lonca-b.svg";
 import blonca from "../assets/btn/lonca-s.svg";
-import PrintButton from "../components/PrintButton";
 
 
-export default function DefBtnBoard({ uploadBG, onRadioChange, onBaslikChange, onYazarChange, onPageAmountChange, pageAmount }) {
-
+export default function DefBtnBoard({ uploadBG, onRadioChange, onBaslikChange, onYazarChange, addedCellCount, onExportClick }) {
+    
     return (
         <Card radius="sm" shadow="sm" className="flex flex-col gap-2 w-min h-min p-4 shrink-0" >
             <h1>Kontrol Paneli</h1>
@@ -73,9 +72,14 @@ export default function DefBtnBoard({ uploadBG, onRadioChange, onBaslikChange, o
 
             <Divider />
 
-            <PrintButton
-                onPageAmountChange={onPageAmountChange}
-                pageAmount={pageAmount} />
+            <Button
+                variant="flat"
+                color="success"
+                radius="sm" 
+                onPress={onExportClick} >
+                <FontAwesomeIcon icon={faDownload} />
+                {addedCellCount + 1} sayfa yazdır.
+            </Button>
         </Card>
     )
 }

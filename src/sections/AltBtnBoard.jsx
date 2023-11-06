@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-import { faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Input } from "@nextui-org/input";
-import PrintButton from "../components/PrintButton";
 
 export default function AltBtnBoard() {
     return (
@@ -25,7 +24,13 @@ export default function AltBtnBoard() {
                 Metin gir.
             </Button>
             <Divider />
-            <PrintButton />
+            <Button
+                variant="flat"
+                color="success"
+                radius="sm" >
+                <FontAwesomeIcon icon={faDownload} />
+                {addedCellCount + 1} sayfa yazdır.
+            </Button>
         </Card>
     )
 }

@@ -2,7 +2,8 @@ import Header from "../sections/Header";
 import Previews from "../sections/Previews";
 import HeaderImg1 from "../assets/all/SVG/headerimg1.svg"
 import DefBtnBoard from "../sections/DefBtnBoard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import exportAsImage from "../utils/ExportAsImage.jsx";
 
 
 export default function DefaultPage() {
@@ -10,12 +11,12 @@ export default function DefaultPage() {
     const [selectedValue, setSelectedValue] = useState(null);
     const [baslik, setBaslik] = useState("");
     const [yazar, setYazar] = useState("");
-    const [pageAmount, setPageAmount] = useState(0);
+    const [addedCellCount, setAddedCellCount] = useState(1);
+    const [exportClicked, setExportClicked] = useState(false);
 
-
-    const handleRadioChange = (value) => {
+    function handleRadioChange(value) {
         setSelectedValue(value);
-    };
+    }
 
     function handleBaslikChange(value) {
         setBaslik(value);
@@ -24,9 +25,15 @@ export default function DefaultPage() {
     function handleYazarChange(value) {
         setYazar(value);
     }
-    function handlePageAmountChange(value) {
-        setPageAmount(value);
+
+    function handleAddNewCell() {
+        setAddedCellCount((prevCount) => prevCount + 1);
     }
+
+    function handleExportClick() {
+        setExportClicked(true);
+    }
+
 
     return (
         <>
@@ -39,8 +46,8 @@ export default function DefaultPage() {
                     onRadioChange={handleRadioChange}
                     onBaslikChange={handleBaslikChange}
                     onYazarChange={handleYazarChange}
-                    onPageAmountChange={handlePageAmountChange}
-                    pageAmount={pageAmount}
+                    addedCellCount={addedCellCount}
+                    onExportClick={handleExportClick}
                 />
 
                 <Previews
@@ -48,6 +55,9 @@ export default function DefaultPage() {
                     selectedValue={selectedValue}
                     baslik={baslik}
                     yazar={yazar}
+                    onAddNewCell={handleAddNewCell}
+                    addedCellCount={addedCellCount}
+                    exportClicked={exportClicked}
                 />
 
             </div>

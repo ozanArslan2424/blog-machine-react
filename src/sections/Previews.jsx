@@ -1,6 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Card } from '@nextui-org/card';
+import { Button } from '@nextui-org/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAdd } from '@fortawesome/free-solid-svg-icons';
+import exportAsImage from '../utils/ExportAsImage.jsx';
+// images
 import blackBG from '../assets/all/PNG/blackbg-prev.png';
 import whiteBG from '../assets/all/PNG/whitebg-prev.png';
 import blackTitle from '../assets/all/PNG/btitle-prev.png';
@@ -9,9 +14,6 @@ import whiteTpocg from '../assets/all/PNG/wtpocg-prev.png';
 import blackTpocg from '../assets/all/PNG/btpocg-prev.png';
 import whiteLonca from '../assets/all/PNG/wlon-prev.png';
 import blackLonca from '../assets/all/PNG/blon-prev.png';
-import { Button } from '@nextui-org/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd } from '@fortawesome/free-solid-svg-icons';
 
 const imageMap = {
     'bg black': blackBG,
@@ -25,29 +27,36 @@ const imageMap = {
 };
 
 
-export default function Previews({ selectedBG, selectedValue, baslik, yazar }) {
-    const [otherCellCount, setOtherCellCount] = useState(1);
-
-    const handleAddNewCell = () => {
-        setOtherCellCount(otherCellCount + 1);
-    };
+export default function Previews({ selectedBG, selectedValue, baslik, yazar, onAddNewCell, addedCellCount, exportClicked }) {
+    let exportRef = useRef(null);
+    useEffect(() => {
+        console.log(exportClicked);
+        const elements = exportRef.current.querySelectorAll(".print-cell");
+        exportAsImage(elements, "blog.png");
+    }, [exportClicked]);
 
     return (
-        <Card radius="sm" shadow="sm" className="flex flex-row flex-wrap gap-4 p-4 max-w-[908px]">
+        <Card
+        ref={exportRef}
+            radius="sm"
+            shadow="sm"
+            className="flex flex-row flex-wrap gap-4 p-4 max-w-[908px]">
             <CoverPreviewCell
+                className="print-cell"
                 selectedBG={selectedBG}
                 selectedValue={selectedValue}
                 baslik={baslik}
                 yazar={yazar}
             />
-            {[...Array(otherCellCount)].map((_, index) => (
+            {[...Array(addedCellCount)].map((_, index) => (
                 <OtherPreviewCell
+                    className="print-cell"
                     key={index}
                     selectedBG={selectedBG}
                     selectedValue={selectedValue}
                 />
             ))}
-            <Button disableRipple onClick={handleAddNewCell} radius="full" color="primary" className="w-[430px]">
+            <Button disableRipple onClick={onAddNewCell} radius="full" color="primary" className="w-[430px]">
                 <FontAwesomeIcon icon={faAdd} size="lg" />
             </Button>
         </Card>
@@ -112,7 +121,7 @@ const OtherPreviewCell = ({ selectedValue, selectedBG }) => {
             {textBG && <img src={textBG} className={placement} />}
             {/* 3rd layer: text */}
             <div
-                contentEditable
+                // contentEditable
                 className={`z-10 py-6 px-7 max-h-full overflow-scroll arial-font ${textBG == blackBG ? "text-white" : "text-black"}`}>
                 text placeholder
             </div>
