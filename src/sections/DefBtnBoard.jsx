@@ -16,8 +16,14 @@ import wlonca from "../assets/btn/lonca-b.svg";
 import blonca from "../assets/btn/lonca-s.svg";
 
 
-export default function DefBtnBoard({ uploadBG, onRadioChange, onBaslikChange, onYazarChange, addedCellCount, onExportClick }) {
-    
+export default function DefBtnBoard({
+    uploadBG,
+    onRadioChange,
+    onBaslikChange,
+    onYazarChange,
+    addedCellCount,
+    onGenerateImages, }) {
+
     return (
         <Card radius="sm" shadow="sm" className="flex flex-col gap-2 w-min h-min p-4 shrink-0" >
             <h1>Kontrol Paneli</h1>
@@ -75,8 +81,9 @@ export default function DefBtnBoard({ uploadBG, onRadioChange, onBaslikChange, o
             <Button
                 variant="flat"
                 color="success"
-                radius="sm" 
-                onPress={onExportClick} >
+                radius="sm"
+                onPress={onGenerateImages}
+            >
                 <FontAwesomeIcon icon={faDownload} />
                 {addedCellCount + 1} sayfa yazdır.
             </Button>
