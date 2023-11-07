@@ -3,17 +3,14 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Cronus";
-  src: url("/Cronus Round.otf") format('truetype');
-}
-@font-face {
-  font-family: "Belgiano";
-  src: url("/Belgiano Serif 2.otf") format('truetype');
-}
-* {
-  box-sizing: border-box !important;
+  font-family: 'Cronus';
+  src: url('/Cronus Round.otf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Baskerville';
+  src: url('/Baskerville-BT.ttf') format('truetype');
+}
 
 @media (max-width: 768px) {
   .responsive-flex {
@@ -22,8 +19,12 @@
   }
 }
 
+* {
+  box-sizing: border-box !important;
+}
+
 .cronus-font {
-  font-family: "Cronus" !important;
+  font-family: 'Cronus' !important;
 }
 
 .arial-font {
@@ -31,5 +32,5 @@
 }
 
 .title-font {
-  font-family: "Belgiano" !important;
+  font-family: 'Baskerville', 'Times New Roman', Times, serif !important;
 }

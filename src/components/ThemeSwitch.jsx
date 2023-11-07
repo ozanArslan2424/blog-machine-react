@@ -5,43 +5,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 export function ThemeSwitcher() {
-    const [mounted, setMounted] = useState(false)
-    const { setTheme } = useTheme('dark')
+  const [mounted, setMounted] = useState(false);
+  const { setTheme } = useTheme("dark");
 
-
-    function switchTheme(e) {
-        if (e.target.checked) {
-            setTheme('light')
-        }
-        else {
-            setTheme('dark')
-        }
+  function switchTheme(e) {
+    if (e.target.checked) {
+      setTheme("light");
+    } else {
+      setTheme("dark");
     }
+  }
 
-    useEffect(() => {
-        setMounted(true)
-    }, [])
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    if (!mounted) return null
+  if (!mounted) return null;
 
-    return (
-        <Switch
-            id="theme-switcher"
-            name="theme-switcher"
-            aria-labelledby="theme-switcher"
-            className="my-2"
-            onChange={switchTheme}
-            size="lg"
-            color="success"
-            thumbIcon={({ isSelected }) =>
-                isSelected ? (
-                    <FontAwesomeIcon icon={faMoon} />
-                ) : (
-                    <FontAwesomeIcon icon={faSun} style={{ color: "#000000", }} />
-                )
-            }
-        >
-        </Switch>
-
-    )
+  return (
+    <Switch
+      id="theme-switcher"
+      name="theme-switcher"
+      aria-labelledby="theme-switcher"
+      className="mr-2"
+      onChange={switchTheme}
+      size="md"
+      color="success"
+      thumbIcon={({ isSelected }) =>
+        isSelected ? (
+          <FontAwesomeIcon icon={faMoon} />
+        ) : (
+          <FontAwesomeIcon icon={faSun} style={{ color: "#000000" }} />
+        )
+      }
+    ></Switch>
+  );
 }
