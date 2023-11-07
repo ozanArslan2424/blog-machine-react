@@ -1,15 +1,14 @@
 import Header from "../sections/Header";
 import Previews from "../sections/Previews";
-import HeaderImg2 from "../assets/all/SVG/headerimg2.svg"
 import AltBtnBoard from "../sections/AltBtnBoard";
 
 
 export default function DefaultPage() {
     return (
         <>
-            <Header headerImage={HeaderImg2} />
+            <Header headerTitle="Ayın Önerileri" />
             <div className="flex responsive-flex justify-center gap-4 px-4 w-screen">
-                <AltBtnBoard />
+                {/* <AltBtnBoard /> */}
                 <Previews />
             </div>
         </>

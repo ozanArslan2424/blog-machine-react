@@ -1,6 +1,5 @@
 import Header from "../sections/Header";
 import Previews from "../sections/Previews";
-import HeaderImg1 from "../assets/all/SVG/headerimg1.svg"
 import DefBtnBoard from "../sections/DefBtnBoard";
 import { useRef, useState } from "react";
 
@@ -20,7 +19,7 @@ export default function DefaultPage() {
 
     return (
         <>
-            <Header headerImage={HeaderImg1} />
+            <Header headerTitle="Akıl Defterim" />
             <div className="flex responsive-flex justify-center gap-4 px-4 w-screen">
                 <DefBtnBoard
                     uploadBG={(bg) => setState(prevState => ({ ...prevState, selectedBG: bg }))}

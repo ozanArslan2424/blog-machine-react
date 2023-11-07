@@ -6,7 +6,10 @@
   font-family: "Cronus";
   src: url("../public/Cronus Round.otf") format('truetype');
 }
-
+@font-face {
+  font-family: "Belgiano";
+  src: url("../public/Belgiano Serif 2.otf") format('truetype');
+}
 * {
   box-sizing: border-box !important;
 }
@@ -25,4 +28,8 @@
 
 .arial-font {
   font-family: Arial !important;
+}
+
+.title-font {
+  font-family: "Belgiano" !important;
 }
