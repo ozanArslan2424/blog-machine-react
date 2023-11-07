@@ -26,7 +26,7 @@ const imageMap = {
 
 const placement = 'absolute z-auto h-full w-full';
 
-const Previews = forwardRef((
+const DefaultPreviews = forwardRef((
     { selectedBG, selectedValue, baslik, yazar },
     ref) => {
 
@@ -76,8 +76,8 @@ const Previews = forwardRef((
         </Card>
     );
 });
-Previews.displayName = 'Previews';
-export default Previews;
+DefaultPreviews.displayName = 'DefaultPreviews';
+export default DefaultPreviews;
 
 
 const CoverPreviewCell = forwardRef((

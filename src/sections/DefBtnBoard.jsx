@@ -5,7 +5,7 @@ import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import { Divider } from "@nextui-org/divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 // images
 import wtitle from "../assets/btn/bas-b.svg";
@@ -21,11 +21,10 @@ export default function DefBtnBoard({
     onRadioChange,
     onBaslikChange,
     onYazarChange,
-    onFocusClick,
     onGenerateImages, }) {
 
     return (
-        <Card radius="sm" shadow="sm" className="flex flex-col gap-2 w-min h-min p-4 shrink-0" >
+        <Card radius="sm" shadow="sm" className="flex flex-col gap-2 w-[336px] h-min p-4 shrink-0" >
             <h1>Kontrol Paneli</h1>
 
             <Divider />
@@ -70,15 +69,6 @@ export default function DefBtnBoard({
                 radius="sm"
                 placeholder="Yazar"
                 onValueChange={onYazarChange} />
-
-            <Button
-                variant="flat"
-                color="primary"
-                radius="sm"
-                onPress={onFocusClick}>
-                <FontAwesomeIcon icon={faPen} />
-                Metin gir.
-            </Button>
 
             <Divider />
 

@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { faDownload, faPen, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Input } from "@nextui-org/input";
 
-export default function AltBtnBoard() {
+export default function AltBtnBoard({onOkuBaslikChange, onDinleBaslikChange, onIzleBaslikChange, onBonusBaslikChange}) {
     return (
         <Card
             radius="sm"
@@ -16,46 +16,53 @@ export default function AltBtnBoard() {
             <h1>Kontrol Paneli</h1>
             <Divider />
 
-            <CustomInput fileType="Oku" />
-            <CustomInput fileType="Dinle" />
-            <CustomInput fileType="İzle" />
-            <Button variant="flat" color="primary" radius="sm">
-                <FontAwesomeIcon icon={faPen} />
-                Metin gir.
-            </Button>
+            <div className="flex gap-2">
+                <Button className="flex flex-col h-24 w-24" variant="flat" color="secondary" radius="sm">
+                    <FontAwesomeIcon icon={faUpload} />
+                    Oku Görsel
+                </Button>
+
+                <Button className="flex flex-col h-24 w-24" variant="flat" color="secondary" radius="sm">
+                    <FontAwesomeIcon icon={faUpload} />
+                    Dinle Görsel
+                </Button>
+
+                <Button className="flex flex-col h-24 w-24" variant="flat" color="secondary" radius="sm">
+                    <FontAwesomeIcon icon={faUpload} />
+                    İzle Görsel
+                </Button>
+            </div>
+            <Divider />
+
+            <Input type="text" variant="bordered" radius="sm"
+            onValueChange={onOkuBaslikChange}
+                placeholder="Oku Başlık"
+            />
+
+            <Input type="text" variant="bordered" radius="sm"
+            onValueChange={onDinleBaslikChange}
+                placeholder="Dinle Başlık"
+            />
+
+            <Input type="text" variant="bordered" radius="sm"
+            onValueChange={onIzleBaslikChange}
+                placeholder="İzle Başlık"
+            />
+
+            <Divider />
+            <h2 className="-mb-1 text-sm">Bonus varsa:</h2>
+            <Input type="text" variant="bordered" radius="sm"
+            onValueChange={onBonusBaslikChange}
+                placeholder="Bonus Başlık"
+            />
             <Divider />
             <Button
                 variant="flat"
                 color="success"
                 radius="sm" >
                 <FontAwesomeIcon icon={faDownload} />
-                {addedCellCount + 1} sayfa yazdır.
+                Bütün sayfaları yazdır.
             </Button>
-        </Card>
-    )
-}
-
-const CustomInput = ({ fileType }) => {
-    return (
-        <div className="flex gap-2">
-            <Button
-                className="w-1/3"
-                variant="flat"
-                color="secondary"
-                radius="sm"
-            >
-                <FontAwesomeIcon icon={faUpload} />
-                {fileType} Görsel
-            </Button>
-
-            <Input
-                className="w-2/3"
-                type="text"
-                variant="bordered"
-                radius="sm"
-                placeholder={fileType + " Başlık"}
-            />
-
-        </div>
+        </Card >
     )
 }

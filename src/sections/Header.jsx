@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Image } from "@nextui-org/image";
 import { ThemeSwitcher } from "../components/ThemeSwitch";
 import NavBar from "../components/NavBar";
 import HamburgerMenu from "../components/HamburgerMenu";
@@ -11,7 +10,10 @@ export default function Header({ headerTitle }) {
             <div className="flex items-start justify-between w-screen px-4">
                 <HamburgerMenu />
 
-                <h1 className="title-font md:text-5xl text-4xl text-black dark:text-white mb-2">{headerTitle}</h1>
+                <h1 className="title-font md:text-5xl text-4xl text-center text-black dark:text-white mb-2">
+                    {headerTitle} Makinesi
+                </h1>
+
 
                 <ThemeSwitcher />
             </div>

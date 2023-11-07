@@ -4,11 +4,11 @@
 
 @font-face {
   font-family: "Cronus";
-  src: url("../public/Cronus Round.otf") format('truetype');
+  src: url("/Cronus Round.otf") format('truetype');
 }
 @font-face {
   font-family: "Belgiano";
-  src: url("../public/Belgiano Serif 2.otf") format('truetype');
+  src: url("/Belgiano Serif 2.otf") format('truetype');
 }
 * {
   box-sizing: border-box !important;

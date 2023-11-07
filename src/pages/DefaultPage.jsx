@@ -1,5 +1,5 @@
 import Header from "../sections/Header";
-import Previews from "../sections/Previews";
+import DefaultPreviews from "../sections/DefaultPreviews";
 import DefBtnBoard from "../sections/DefBtnBoard";
 import { useRef, useState } from "react";
 
@@ -28,7 +28,7 @@ export default function DefaultPage() {
                     onYazarChange={handleYazarChange}
                     onGenerateImages={handleGenerateImages}
                 />
-                <Previews
+                <DefaultPreviews
                     selectedBG={state.selectedBG}
                     selectedValue={state.selectedValue}
                     baslik={state.baslik}
