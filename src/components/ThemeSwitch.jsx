@@ -27,7 +27,6 @@ export function ThemeSwitcher() {
       id="theme-switcher"
       name="theme-switcher"
       aria-labelledby="theme-switcher"
-      className="mr-2"
       onChange={switchTheme}
       size="md"
       color="success"

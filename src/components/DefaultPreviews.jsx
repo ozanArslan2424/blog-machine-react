@@ -37,24 +37,32 @@ const DefaultPreviews = forwardRef(
   ({ selectedBG, selectedValue, baslik, yazar }, ref) => {
     const generateImages = () => {
       const nodes = printCellRefs.current;
-
       const promises = Array.from(nodes).map((node, index) =>
         toJpeg(node, { quality: 1 })
           .then((dataUrl) => ({ dataUrl, index }))
           .catch((error) => {
             console.error("oops, something went wrong!", error);
+            return { error, index }; // Return an error object
           })
       );
 
       Promise.all(promises).then((results) => {
-        results.forEach(({ dataUrl, index }) => {
-          const link = document.createElement("a");
-          link.download = `blog_${index}.jpeg`;
-          link.href = dataUrl;
-          link.click();
+        results.forEach((result) => {
+          if (result.error) {
+            console.error(
+              `Error generating image for node ${result.index}:`,
+              result.error
+            );
+          } else {
+            const link = document.createElement("a");
+            link.download = `blog_${result.index}.jpeg`;
+            link.href = result.dataUrl;
+            link.click();
+          }
         });
       });
     };
+
     useImperativeHandle(ref, () => ({
       generateImages,
     }));
@@ -165,46 +173,50 @@ const CoverPreviewCell = forwardRef(
 
 CoverPreviewCell.displayName = "CoverPreviewCell";
 
-const OtherPreviewCell = forwardRef(({ withTitle, baslik, selectedValue, selectedBG }, ref) => {
-  const [textBG, setTextBG] = useState(null);
+const OtherPreviewCell = forwardRef(
+  ({ withTitle, baslik, selectedValue, selectedBG }, ref) => {
+    const [textBG, setTextBG] = useState(null);
+    const defaultValue = useMemo(() => "Buraya metin girin.", []);
 
-  useEffect(() => {
-    if (selectedValue && selectedValue.includes("bg")) {
-      setTextBG(imageMap[selectedValue]);
-    }
-  }, [selectedValue]);
+    useEffect(() => {
+      if (selectedValue && selectedValue.includes("bg")) {
+        setTextBG(imageMap[selectedValue]);
+      }
+    }, [selectedValue]);
 
-  const defaultValue = useMemo(() => "Buraya metin girin.", []);
 
-  return (
-    <Card
-      ref={ref}
-      radius="sm"
-      shadow="sm"
-      className="bg-white w-[430px] h-[500px]"
-    >
-      {/* 1st layer: background image*/}
-      <img src={selectedBG} className={placement} />
-      {/* 2nd layer: text color*/}
-      {textBG && <img src={textBG} className={placement} />}
-      {/* 3rd layer: text */}
-      {withTitle && (
-          <span className={`z-10 pt-6 pl-7 arial-font font-semibold ${
-            textBG == blackBG ? "text-white" : "text-black"
-          }`}>
+    return (
+      <Card
+        ref={ref}
+        radius="sm"
+        shadow="sm"
+        className="bg-white w-[430px] h-[500px]"
+      >
+        {/* 1st layer: background image*/}
+        <img src={selectedBG} className={placement} />
+        {/* 2nd layer: text color*/}
+        {textBG && <img src={textBG} className={placement} />}
+        {/* 3rd layer: text */}
+        {withTitle && (
+          <span
+            className={`z-10 pt-6 pl-7 arial-font font-semibold ${
+              textBG == blackBG ? "text-white" : "text-black"
+            }`}
+          >
             {baslik}
           </span>
         )}
-      <textarea
-        className={`z-10 ${
-          withTitle ? "pb-6" : "py-6"
-        } px-7 h-full overflow-scroll arial-font bg-transparent ${
-          textBG == blackBG ? "text-white" : "text-black"
-        }`}
-        defaultValue={defaultValue}
-      ></textarea>
-    </Card>
-  );
-});
+        <textarea
+          className={`z-10 ${
+            withTitle ? "pb-6" : "py-6"
+          } px-7 h-full overflow-scroll arial-font bg-transparent ${
+            textBG == blackBG ? "text-white" : "text-black"
+          }`}
+          defaultValue={defaultValue}
+        ></textarea>
+      </Card>
+    );
+  }
+);
 
 OtherPreviewCell.displayName = "OtherPreviewCell";

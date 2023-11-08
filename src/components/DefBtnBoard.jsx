@@ -15,6 +15,55 @@ import btpocg from "/btn/tpocg-s.svg";
 import wlonca from "/btn/lonca-b.svg";
 import blonca from "/btn/lonca-s.svg";
 
+const handleFileUpload = (upload) => (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    const imageUrl = e.target.result;
+    upload(imageUrl);
+  };
+
+  reader.readAsDataURL(file);
+};
+
+const FileInputButton = ({ upload, buttonText }) => {
+  const inputRef = useRef(null);
+
+  return (
+    <>
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        ref={inputRef}
+        style={{ display: "none" }}
+        onChange={handleFileUpload(upload)}
+      />
+      <Button
+        variant="flat"
+        color="secondary"
+        radius="sm"
+        className="w-full"
+        onPress={() => inputRef.current.click()}
+      >
+        <FontAwesomeIcon icon={faUpload} />
+        {buttonText}
+      </Button>
+    </>
+  );
+};
+
+const CustomInput = ({ onValueChange, placeholder }) => (
+  <Input
+    type="text"
+    variant="bordered"
+    radius="sm"
+    placeholder={placeholder}
+    onValueChange={onValueChange}
+  />
+);
+
 export default function DefBtnBoard({
   uploadBG,
   onRadioChange,
@@ -32,7 +81,7 @@ export default function DefBtnBoard({
 
       <Divider />
 
-      <UploadButton uploadBG={uploadBG} />
+      <FileInputButton upload={uploadBG} buttonText="Arka Plan Görseli Yükle" />
 
       <Divider />
 
@@ -63,21 +112,9 @@ export default function DefBtnBoard({
 
       <Divider />
 
-      <Input
-        type="text"
-        variant="bordered"
-        radius="sm"
-        placeholder="Başlık"
-        onValueChange={onBaslikChange}
-      />
+      <CustomInput onValueChange={onBaslikChange} placeholder="Başlık" />
 
-      <Input
-        type="text"
-        variant="bordered"
-        radius="sm"
-        placeholder="Yazar"
-        onValueChange={onYazarChange}
-      />
+      <CustomInput onValueChange={onYazarChange} placeholder="Yazar" />
 
       <Divider />
 
@@ -94,45 +131,6 @@ export default function DefBtnBoard({
   );
 }
 
-const UploadButton = ({ uploadBG }) => {
-  const inputRef = useRef(null);
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      const imageUrl = e.target.result;
-      uploadBG(imageUrl);
-    };
-
-    reader.readAsDataURL(file);
-  };
-
-  return (
-    <>
-      <input
-        type="file"
-        id="fileInput"
-        accept="image/*"
-        ref={inputRef}
-        style={{ display: "none" }}
-        onChange={handleFileUpload}
-      />
-      <Button
-        variant="flat"
-        color="secondary"
-        radius="sm"
-        className="w-full"
-        onPress={() => inputRef.current.click()}
-      >
-        <FontAwesomeIcon icon={faUpload} />
-        Arka Plan Görseli Yükle
-      </Button>
-    </>
-  );
-};
-
 const CustomRadioButton = ({
   optionName,
   class1,
@@ -142,7 +140,7 @@ const CustomRadioButton = ({
   onRadioChange,
 }) => {
   let radioButtonStyle =
-    "bg-no-repeat bg-center w-36 h-14 ring-inset ring-2 ring-zinc-300 dark:ring-zinc-700 hover:cursor-pointer hover:ring-2 hover:ring-zinc-400";
+    "bg-no-repeat bg-center w-1/2 h-14 ring-inset ring-2 ring-zinc-300 dark:ring-zinc-700 hover:cursor-pointer hover:ring-2 hover:ring-zinc-400";
 
   return (
     <ButtonGroup radius="sm" disableRipple className="">

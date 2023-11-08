@@ -10,11 +10,12 @@ import {
 export default function HamburgerMenu() {
   return (
     <Dropdown>
-      <DropdownTrigger>
+      <DropdownTrigger
+          className="hover:cursor-pointer mr-[35px]"
+          >
         <FontAwesomeIcon
           icon={faBars}
           size="xl"
-          className="ml-2 hover:cursor-pointer"
         />
       </DropdownTrigger>
       <DropdownMenu aria-label="Diğer Siteler Menüsü" disabledKeys={["title"]}>

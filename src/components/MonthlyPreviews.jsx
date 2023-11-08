@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
 
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 import { Card } from "@nextui-org/react";
-import { forwardRef, useMemo } from "react";
+import { toJpeg } from "html-to-image";
 //images
 import Back from "/monthly/back-color.png";
 import CoverBG from "/monthly/cover.png";
@@ -22,6 +29,44 @@ const MonthlyPreviews = forwardRef(
     },
     ref
   ) => {
+    const generateImages = () => {
+      const nodes = printCellRefs.current;
+      const promises = Array.from(nodes).map((node, index) =>
+        toJpeg(node, { quality: 1 })
+          .then((dataUrl) => ({ dataUrl, index }))
+          .catch((error) => {
+            console.error("oops, something went wrong!", error);
+            return { error, index }; // Return an error object
+          })
+      );
+
+      Promise.all(promises).then((results) => {
+        results.forEach((result) => {
+          if (result.error) {
+            console.error(
+              `Error generating image for node ${result.index}:`,
+              result.error
+            );
+          } else {
+            const link = document.createElement("a");
+            link.download = `blog_${result.index}.jpeg`;
+            link.href = result.dataUrl;
+            link.click();
+          }
+        });
+      });
+    };
+
+    useImperativeHandle(ref, () => ({
+      generateImages,
+    }));
+
+    const printCellRefs = useRef([]);
+
+    useEffect(() => {
+      printCellRefs.current = printCellRefs.current.slice(0, 6); //take a look at this line
+    }, []);
+
     return (
       <Card
         radius="sm"
@@ -29,35 +74,56 @@ const MonthlyPreviews = forwardRef(
         className="flex flex-row flex-wrap gap-4 p-4 max-w-[908px] min-w-[462px]"
       >
         <CoverPreviewCell
+          ref={(el) => (printCellRefs.current[0] = el)}
           okuGorsel={okuGorsel}
           dinleGorsel={dinleGorsel}
           izleGorsel={izleGorsel}
         />
-        <OtherPreviewCell withTitle={true} baslikType="Ayın Önerileri" />
         <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[1] = el)}
+          withTitle={true}
+          baslikType="Ayın Önerileri"
+        />
+        <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[2] = el)}
           withTitle={true}
           baslikType="Oku: "
           baslikText={okuBaslik}
         />
-        <OtherPreviewCell withTitle={false} />
         <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[3] = el)}
+          withTitle={false}
+        />
+        <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[4] = el)}
           withTitle={true}
           baslikType="Dinle: "
           baslikText={dinleBaslik}
         />
-        <OtherPreviewCell withTitle={false} />
         <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[5] = el)}
+          withTitle={false}
+        />
+        <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[6] = el)}
           withTitle={true}
           baslikType="İzle: "
           baslikText={izleBaslik}
         />
-        <OtherPreviewCell withTitle={false} />
         <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[7] = el)}
+          withTitle={false}
+        />
+        <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[8] = el)}
           withTitle={true}
           baslikType="Bonus: "
           baslikText={bonusBaslik}
         />
-        <OtherPreviewCell withTitle={false} />
+        <OtherPreviewCell
+          ref={(el) => (printCellRefs.current[9] = el)}
+          withTitle={false}
+        />
       </Card>
     );
   }
@@ -91,7 +157,7 @@ const CoverPreviewCell = forwardRef(
         <img
           src={izleGorsel}
           alt="izle görseli buraya"
-          className={`w-[118px] h-[113px] bottom-[109px] left-[283px] ${placement}`}
+          className={`w-[118px] h-[113px] bottom-[109px] left-[282px] ${placement}`}
         />
         {/* 3rd layer: background image*/}
         <img src={CoverBG} className={placement} />
