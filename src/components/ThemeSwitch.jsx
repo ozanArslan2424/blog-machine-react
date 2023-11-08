@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
-export function ThemeSwitcher() {
+export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
   const { setTheme } = useTheme("dark");
 

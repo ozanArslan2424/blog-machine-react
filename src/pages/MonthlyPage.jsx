@@ -1,4 +1,5 @@
-import AltBtnBoard from "../components/AltBtnBoard";
+import InfoCard from "../components/InfoCard";
+import MonthlyBoard from "../components/MonthlyBoard";
 import MonthlyPreviews from "../components/MonthlyPreviews";
 import { useRef, useState } from "react";
 
@@ -23,7 +24,9 @@ export default function MonthlyPage() {
 
   return (
     <div className="flex responsive-flex justify-center gap-4 p-4 w-screen">
-      <AltBtnBoard
+      <div className="flex flex-col gap-4">
+
+      <MonthlyBoard
         uploadOne={handleGorselUpload("okuGorsel")}
         uploadTwo={handleGorselUpload("dinleGorsel")}
         uploadThree={handleGorselUpload("izleGorsel")}
@@ -33,6 +36,8 @@ export default function MonthlyPage() {
         onBonusBaslikChange={handleBaslikChange("bonusBaslik")}
         onGenerateImages={handleGenerateImages}
       />
+      <InfoCard />
+      </div>
       <MonthlyPreviews {...state} ref={previewsRef} />
     </div>
   );

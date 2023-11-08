@@ -55,7 +55,7 @@ const DefaultPreviews = forwardRef(
             );
           } else {
             const link = document.createElement("a");
-            link.download = `blog_${result.index}.jpeg`;
+            link.download = `blog.jpeg`;
             link.href = result.dataUrl;
             link.click();
           }
@@ -81,7 +81,6 @@ const DefaultPreviews = forwardRef(
       >
         <CoverPreviewCell
           ref={(el) => (printCellRefs.current[0] = el)}
-          className="print-cell"
           selectedBG={selectedBG}
           selectedValue={selectedValue}
           baslik={baslik}
@@ -91,33 +90,33 @@ const DefaultPreviews = forwardRef(
           withTitle={true}
           baslik={baslik}
           ref={(el) => (printCellRefs.current[1] = el)}
-          className="print-cell"
           selectedBG={selectedBG}
           selectedValue={selectedValue}
+          pageNumber="1"
         />
         <OtherPreviewCell
           ref={(el) => (printCellRefs.current[2] = el)}
-          className="print-cell"
           selectedBG={selectedBG}
           selectedValue={selectedValue}
+          pageNumber="2"
         />
         <OtherPreviewCell
           ref={(el) => (printCellRefs.current[3] = el)}
-          className="print-cell"
           selectedBG={selectedBG}
           selectedValue={selectedValue}
+          pageNumber="3"
         />
         <OtherPreviewCell
           ref={(el) => (printCellRefs.current[4] = el)}
-          className="print-cell"
           selectedBG={selectedBG}
           selectedValue={selectedValue}
+          pageNumber="4"
         />
         <OtherPreviewCell
           ref={(el) => (printCellRefs.current[5] = el)}
-          className="print-cell"
           selectedBG={selectedBG}
           selectedValue={selectedValue}
+          pageNumber="5"
         />
       </Card>
     );
@@ -159,11 +158,11 @@ const CoverPreviewCell = forwardRef(
           <img src={image} className={placement} key={index} />
         ))}
         {/* 5th layer: title text */}
-        <span className="z-10 mt-[27px] ml-28 mr-4 text-center cronus-font text-[22px]">
+        <span className="z-10 mt-[27px] ml-28 mr-4 text-center cronus-font text-[22px] text-white">
           {baslik}
         </span>
         {/* 6th layer: author text */}
-        <span className="z-10 mt-[15px] ml-56 mr-5 text-center cronus-font">
+        <span className="z-10 mt-[15px] ml-56 mr-5 text-center cronus-font text-white">
           {yazar}
         </span>
       </Card>
@@ -174,7 +173,7 @@ const CoverPreviewCell = forwardRef(
 CoverPreviewCell.displayName = "CoverPreviewCell";
 
 const OtherPreviewCell = forwardRef(
-  ({ withTitle, baslik, selectedValue, selectedBG }, ref) => {
+  ({ withTitle, baslik, selectedValue, selectedBG, pageNumber }, ref) => {
     const [textBG, setTextBG] = useState(null);
     const defaultValue = useMemo(() => "Buraya metin girin.", []);
 
@@ -184,7 +183,6 @@ const OtherPreviewCell = forwardRef(
       }
     }, [selectedValue]);
 
-
     return (
       <Card
         ref={ref}
@@ -192,6 +190,14 @@ const OtherPreviewCell = forwardRef(
         shadow="sm"
         className="bg-white w-[430px] h-[500px]"
       >
+        {/* 0th layer: page number*/}
+        <span
+          className={`absolute z-10 bottom-0 right-0 mr-1 arial-font font-semibold ${
+            textBG == blackBG ? "text-white" : "text-black"
+          }`}
+        >
+          {pageNumber}
+        </span>
         {/* 1st layer: background image*/}
         <img src={selectedBG} className={placement} />
         {/* 2nd layer: text color*/}

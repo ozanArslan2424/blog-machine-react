@@ -1,6 +1,7 @@
-import DefaultPreviews from "../components/DefaultPreviews";
-import DefBtnBoard from "../components/DefBtnBoard";
 import { useRef, useState } from "react";
+import DefaultPreviews from "../components/DefaultPreviews";
+import DefaultBoard from "../components/DefaultBoard";
+import InfoCard from "../components/InfoCard";
 
 export default function DefaultPage() {
   const [state, setState] = useState({
@@ -21,15 +22,18 @@ export default function DefaultPage() {
 
   return (
     <div className="flex responsive-flex justify-center gap-4 p-4 w-screen">
-      <DefBtnBoard
-        uploadBG={(bg) =>
-          setState((prevState) => ({ ...prevState, selectedBG: bg }))
-        }
-        onRadioChange={handleRadioChange}
-        onBaslikChange={handleBaslikChange}
-        onYazarChange={handleYazarChange}
-        onGenerateImages={handleGenerateImages}
-      />
+      <div className="flex flex-col gap-4">
+        <DefaultBoard
+          uploadBG={(bg) =>
+            setState((prevState) => ({ ...prevState, selectedBG: bg }))
+          }
+          onRadioChange={handleRadioChange}
+          onBaslikChange={handleBaslikChange}
+          onYazarChange={handleYazarChange}
+          onGenerateImages={handleGenerateImages}
+        />
+        <InfoCard />
+      </div>
       <DefaultPreviews
         selectedBG={state.selectedBG}
         selectedValue={state.selectedValue}

@@ -1,5 +1,9 @@
 /* eslint-disable react/prop-types */
-import { faDownload, faUpload } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDownload,
+  faUpload,
+  faWandMagicSparkles,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
@@ -46,7 +50,7 @@ const FileInputButton = ({ upload, buttonText }) => {
   );
 };
 
-export default function AltBtnBoard({
+export default function MonthlyBoard({
   uploadOne,
   uploadTwo,
   uploadThree,
@@ -62,13 +66,16 @@ export default function AltBtnBoard({
       shadow="sm"
       className="flex flex-col gap-2 w-max h-min p-4 shrink-0"
     >
-      <h1>Kontrol Paneli</h1>
+      <h1>
+        <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />
+        Kontrol Paneli
+      </h1>
       <Divider />
 
       <div className="flex gap-2">
-        <FileInputButton upload={uploadOne} buttonText="Oku Görsel" />
-        <FileInputButton upload={uploadTwo} buttonText="Dinle Görsel" />
-        <FileInputButton upload={uploadThree} buttonText="İzle Görsel" />
+        <FileInputButton upload={uploadOne} buttonText="Oku Görseli" />
+        <FileInputButton upload={uploadTwo} buttonText="Dinle Görseli" />
+        <FileInputButton upload={uploadThree} buttonText="İzle Görseli" />
       </div>
       <Divider />
 

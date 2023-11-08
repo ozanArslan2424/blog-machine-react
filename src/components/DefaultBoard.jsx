@@ -5,7 +5,11 @@ import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import { Divider } from "@nextui-org/divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faUpload } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDownload,
+  faUpload,
+  faWandMagicSparkles,
+} from "@fortawesome/free-solid-svg-icons";
 
 // images
 import wtitle from "/btn/bas-b.svg";
@@ -15,56 +19,7 @@ import btpocg from "/btn/tpocg-s.svg";
 import wlonca from "/btn/lonca-b.svg";
 import blonca from "/btn/lonca-s.svg";
 
-const handleFileUpload = (upload) => (event) => {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-
-  reader.onload = (e) => {
-    const imageUrl = e.target.result;
-    upload(imageUrl);
-  };
-
-  reader.readAsDataURL(file);
-};
-
-const FileInputButton = ({ upload, buttonText }) => {
-  const inputRef = useRef(null);
-
-  return (
-    <>
-      <input
-        type="file"
-        id="fileInput"
-        accept="image/*"
-        ref={inputRef}
-        style={{ display: "none" }}
-        onChange={handleFileUpload(upload)}
-      />
-      <Button
-        variant="flat"
-        color="secondary"
-        radius="sm"
-        className="w-full"
-        onPress={() => inputRef.current.click()}
-      >
-        <FontAwesomeIcon icon={faUpload} />
-        {buttonText}
-      </Button>
-    </>
-  );
-};
-
-const CustomInput = ({ onValueChange, placeholder }) => (
-  <Input
-    type="text"
-    variant="bordered"
-    radius="sm"
-    placeholder={placeholder}
-    onValueChange={onValueChange}
-  />
-);
-
-export default function DefBtnBoard({
+export default function DefaultBoard({
   uploadBG,
   onRadioChange,
   onBaslikChange,
@@ -77,7 +32,10 @@ export default function DefBtnBoard({
       shadow="sm"
       className="flex flex-col gap-2 w-[336px] h-min p-4 shrink-0"
     >
-      <h1>Kontrol Paneli</h1>
+      <h1>
+        <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />
+        Kontrol Paneli
+      </h1>
 
       <Divider />
 
@@ -112,9 +70,21 @@ export default function DefBtnBoard({
 
       <Divider />
 
-      <CustomInput onValueChange={onBaslikChange} placeholder="Başlık" />
+      <Input
+        type="text"
+        variant="bordered"
+        radius="sm"
+        placeholder="Başlık"
+        onValueChange={onBaslikChange}
+      />
 
-      <CustomInput onValueChange={onYazarChange} placeholder="Yazar" />
+      <Input
+        type="text"
+        variant="bordered"
+        radius="sm"
+        placeholder="Yazar"
+        onValueChange={onYazarChange}
+      />
 
       <Divider />
 
@@ -162,5 +132,44 @@ const CustomRadioButton = ({
         }}
       ></Button>
     </ButtonGroup>
+  );
+};
+
+const handleFileUpload = (upload) => (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    const imageUrl = e.target.result;
+    upload(imageUrl);
+  };
+
+  reader.readAsDataURL(file);
+};
+
+const FileInputButton = ({ upload, buttonText }) => {
+  const inputRef = useRef(null);
+
+  return (
+    <>
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        ref={inputRef}
+        style={{ display: "none" }}
+        onChange={handleFileUpload(upload)}
+      />
+      <Button
+        variant="flat"
+        color="secondary"
+        radius="sm"
+        className="w-full"
+        onPress={() => inputRef.current.click()}
+      >
+        <FontAwesomeIcon icon={faUpload} />
+        {buttonText}
+      </Button>
+    </>
   );
 };

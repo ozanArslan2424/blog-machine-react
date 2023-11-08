@@ -38,3 +38,8 @@ textarea {
 .title-font {
   font-family: 'Baskerville', 'Times New Roman', Times, serif !important;
 }
+
+#website-list a:hover {
+  color: skyblue !important;
+
+}
