@@ -1,8 +1,26 @@
-# React + Vite
+# Blog Design App
+for Turkish Psychology Students Work Group (TPÖÇG).
+This is a much needed app for the publications design team in TPÖÇG. 
+The purpose of the app is to make it easier for publications deaign team to create the blog posts for instagram.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Usage
 
-Currently, two official plugins are available:
+Control panels for the types of blog posts are on the left of the page and the previews for the post's pages are on the right.
+1. Upload background image,
+2. Choose appropriate colors from the control panel,
+3. Enter text directly into the previews part,
+4. Download (*print*) when the design is completed.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Just go to the [website] and start creating blog posts.
+
+## Dependencies:
+- @fortawesome/fontawesome-svg-core: version 6.4.2
+- @fortawesome/free-solid-svg-icons: version 6.4.2
+- @fortawesome/react-fontawesome: version 0.2.0
+- @nextui-org/react: version 2.2.0
+- framer-motion: version 10.16.4
+- html-to-image: version 1.11.11
+- next-themes: version 0.2.1
+- react: version 18.2.0
+- react-dom: version 18.2.0
+- react-router-dom: version 6.18.0
