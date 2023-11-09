@@ -27,7 +27,7 @@ const InfoCard = () => {
 
       <Divider />
 
-      <ul id="website-list">
+      <ul id="website-list" className="text-sm">
         <li>
           <a aria-label="TPÖÇG Web Sitesi" href="https://www.tpocg.org">
             <FontAwesomeIcon icon={faLink} className="mr-2" />

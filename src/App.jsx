@@ -5,6 +5,7 @@ import MonthlyPage from "../src/pages/MonthlyPage.jsx";
 import Header from "../src/sections/Header.jsx";
 import NavBar from "../src/sections/NavBar";
 import Footer from "../src/sections/Footer";
+import QuotesPage from "./pages/QuotesPage.jsx";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function Layout() {
         <Routes>
           <Route path="/" element={<DefaultPage />} />
           <Route path="/ayin-onerileri" element={<MonthlyPage />} />
+          <Route path="/alintilar" element={<QuotesPage />} />
         </Routes>
       </main>
       <Footer />

@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-undef
 const { nextui } = require("@nextui-org/react");
 
-
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -13,5 +12,22 @@ export default {
     extend: {},
   },
   darkMode: "class",
-  plugins: [nextui()]
-}
+  plugins: [
+    nextui({
+      themes: {
+        dark: {
+          colors: {
+            background: "#2a2a2a",
+            foreground: "#f6f6f6",
+          },
+        },
+        light: {
+          colors: {
+            background: "#deebf8",
+            foreground: "#2b2b2b", 
+          }
+        },
+      },
+    }),
+  ],
+};

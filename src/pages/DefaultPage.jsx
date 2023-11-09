@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import DefaultPreviews from "../components/DefaultPreviews";
 import DefaultBoard from "../components/DefaultBoard";
-import InfoCard from "../components/InfoCard";
+import InfoCard from "../components/ui/InfoCard";
 
 export default function DefaultPage() {
   const [state, setState] = useState({

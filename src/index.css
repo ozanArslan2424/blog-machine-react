@@ -23,6 +23,22 @@
   box-sizing: border-box !important;
 }
 
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
+main {
+  padding-bottom: 3.5rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.5rem;
+}
+
 textarea {
   resize: none;
 }
@@ -39,7 +55,11 @@ textarea {
   font-family: 'Baskerville', 'Times New Roman', Times, serif !important;
 }
 
+.frame-border {
+  border: 0.5rem ridge rgba(70, 54, 7, 0.2);
+  box-shadow: 0 0 0.5rem 0.25rem rgba(70, 54, 7, 0.3);
+}
+
 #website-list a:hover {
   color: skyblue !important;
-
 }

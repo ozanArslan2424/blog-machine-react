@@ -1,4 +1,4 @@
-import InfoCard from "../components/InfoCard";
+import InfoCard from "../components/ui/InfoCard";
 import MonthlyBoard from "../components/MonthlyBoard";
 import MonthlyPreviews from "../components/MonthlyPreviews";
 import { useRef, useState } from "react";

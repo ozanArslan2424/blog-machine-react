@@ -5,15 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 export default function ThemeSwitch() {
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const { setTheme } = useTheme("dark");
+  const [isDark, setIsDark] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme ? savedTheme === "dark" : theme === "dark";
+  });
 
-  function switchTheme(e) {
-    if (e.target.checked) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
+  function switchTheme() {
+    const newTheme = isDark ? "light" : "dark";
+    setTheme(newTheme);
+    setIsDark(!isDark);
+    localStorage.setItem("theme", newTheme);
   }
 
   useEffect(() => {
@@ -30,6 +33,7 @@ export default function ThemeSwitch() {
       onChange={switchTheme}
       size="md"
       color="success"
+      checked={isDark}
       thumbIcon={({ isSelected }) =>
         isSelected ? (
           <FontAwesomeIcon icon={faMoon} />

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
@@ -19,6 +19,8 @@ import btpocg from "/btn/tpocg-s.svg";
 import wlonca from "/btn/lonca-b.svg";
 import blonca from "/btn/lonca-s.svg";
 
+
+
 export default function DefaultBoard({
   uploadBG,
   onRadioChange,
@@ -26,6 +28,7 @@ export default function DefaultBoard({
   onYazarChange,
   onGenerateImages,
 }) {
+
   return (
     <Card
       radius="sm"

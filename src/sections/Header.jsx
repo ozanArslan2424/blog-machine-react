@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import ThemeSwitch from "../components/ThemeSwitch";
+import ThemeSwitch from "../components/ui/ThemeSwitch";
 
 
 export default function Header({ headerTitle }) {
