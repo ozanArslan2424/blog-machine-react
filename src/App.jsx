@@ -33,7 +33,7 @@ function Layout() {
       <NavBar />
       <main>
         <Routes>
-          <Route path="/" element={<DefaultPage />} />
+          <Route path="/default" element={<DefaultPage />} />
           <Route path="/ayin-onerileri" element={<MonthlyPage />} />
           <Route path="/alintilar" element={<QuotesPage />} />
         </Routes>
