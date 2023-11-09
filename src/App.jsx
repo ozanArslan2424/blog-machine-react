@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes, Router } from "react-router";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import DefaultPage from "../src/pages/DefaultPage.jsx";
 import MonthlyPage from "../src/pages/MonthlyPage.jsx";
@@ -19,10 +19,12 @@ function Layout() {
   const location = useLocation();
 
   const getHeaderTitle = () => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/blogmachine/") {
       return "Akıl Defterim";
-    } else if (location.pathname === "/ayin-onerileri") {
+    } else if (location.pathname === "/blogmachine/ayin-onerileri") {
       return "Ayın Önerileri";
+    } else if (location.pathname === "/blogmachine/alintilar") {
+      return "PsiNossa Alıntıları";
     }
     return "Akıl Defterim";
   };
@@ -33,9 +35,9 @@ function Layout() {
       <NavBar />
       <main>
         <Routes>
-          <Route path="/default" element={<DefaultPage />} />
-          <Route path="/ayin-onerileri" element={<MonthlyPage />} />
-          <Route path="/alintilar" element={<QuotesPage />} />
+          <Route path="/blogmachine/" element={<DefaultPage />} index />
+          <Route path="/blogmachine/ayin-onerileri" element={<MonthlyPage />} />
+          <Route path="/blogmachine/alintilar" element={<QuotesPage />} />
         </Routes>
       </main>
       <Footer />
