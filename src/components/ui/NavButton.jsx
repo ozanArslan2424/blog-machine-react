@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 
 const NavButton = ({ to, children }) => {

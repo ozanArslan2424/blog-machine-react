@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Card } from "@nextui-org/card";
 import NavButton from "../components/ui/NavButton";
 

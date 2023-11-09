@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   forwardRef,
   useEffect,
@@ -10,7 +9,6 @@ import {
 import { toJpeg } from "html-to-image";
 import { Card } from "@nextui-org/card";
 
-// images
 import blackBG from "/previews/blackbg-prev.png";
 import whiteBG from "/previews/whitebg-prev.png";
 import blackTitle from "/previews/btitle-prev.png";
@@ -42,7 +40,7 @@ const DefaultPreviews = forwardRef(
           .then((dataUrl) => ({ dataUrl, index }))
           .catch((error) => {
             console.error("oops, something went wrong!", error);
-            return { error, index }; // Return an error object
+            return { error, index };
           })
       );
 
@@ -70,7 +68,7 @@ const DefaultPreviews = forwardRef(
     const printCellRefs = useRef([]);
 
     useEffect(() => {
-      printCellRefs.current = printCellRefs.current.slice(0, 6); //take a look at this line
+      printCellRefs.current = printCellRefs.current.slice(0, 6);
     }, []);
 
     return (
@@ -152,10 +150,15 @@ const CoverPreviewCell = forwardRef(
         className="bg-white w-[430px] h-[500px]"
       >
         {/* 1st layer: background image*/}
-        <img src={selectedBG} className={placement} />
+        <img alt="arka plan görseli" src={selectedBG} className={placement} />
         {/* 2nd 3rd 4th layers: title back, logo1, logo2 */}
         {selectedImages.map((image, index) => (
-          <img src={image} className={placement} key={index} />
+          <img
+            alt="başlık ve logolar"
+            src={image}
+            className={placement}
+            key={index}
+          />
         ))}
         {/* 5th layer: title text */}
         <span className="z-10 mt-[27px] ml-28 mr-4 text-center cronus-font text-[22px] text-white">
@@ -199,9 +202,11 @@ const OtherPreviewCell = forwardRef(
           {pageNumber}
         </span>
         {/* 1st layer: background image*/}
-        <img src={selectedBG} className={placement} />
+        <img alt="arka plan görseli" src={selectedBG} className={placement} />
         {/* 2nd layer: text color*/}
-        {textBG && <img src={textBG} className={placement} />}
+        {textBG && (
+          <img alt="yazı arka planı" src={textBG} className={placement} />
+        )}
         {/* 3rd layer: text */}
         {withTitle && (
           <span

@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
@@ -19,8 +18,6 @@ import btpocg from "/btn/tpocg-s.svg";
 import wlonca from "/btn/lonca-b.svg";
 import blonca from "/btn/lonca-s.svg";
 
-
-
 export default function DefaultBoard({
   uploadBG,
   onRadioChange,
@@ -28,7 +25,6 @@ export default function DefaultBoard({
   onYazarChange,
   onGenerateImages,
 }) {
-
   return (
     <Card
       radius="sm"
@@ -39,13 +35,9 @@ export default function DefaultBoard({
         <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />
         Kontrol Paneli
       </h1>
-
       <Divider />
-
       <FileInputButton upload={uploadBG} buttonText="Arka Plan Görseli Yükle" />
-
       <Divider />
-
       <CustomRadioButton
         onRadioChange={onRadioChange}
         optionName="title"
@@ -70,9 +62,7 @@ export default function DefaultBoard({
         class1="bg-white"
         class2="bg-black"
       />
-
       <Divider />
-
       <Input
         type="text"
         variant="bordered"
@@ -80,7 +70,6 @@ export default function DefaultBoard({
         placeholder="Başlık"
         onValueChange={onBaslikChange}
       />
-
       <Input
         type="text"
         variant="bordered"
@@ -88,9 +77,7 @@ export default function DefaultBoard({
         placeholder="Yazar"
         onValueChange={onYazarChange}
       />
-
       <Divider />
-
       <Button
         variant="flat"
         color="success"
@@ -98,8 +85,8 @@ export default function DefaultBoard({
         onPress={onGenerateImages}
       >
         <FontAwesomeIcon icon={faDownload} />
-        Bütün sayfaları yazdır.
       </Button>
+      Bütün sayfaları yazdır.
     </Card>
   );
 }

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Card } from "@nextui-org/react";
 import { toJpeg } from "html-to-image";
 import { forwardRef, useImperativeHandle, useRef } from "react";
@@ -40,11 +39,15 @@ const QuotesPreviews = forwardRef(({ cover }, ref) => {
         className="bg-white w-[430px] h-[500px]"
       >
         {/* 1st layer: background*/}
-        <img src={alintiBG} className="absolute z-auto h-full w-full" />
+        <img
+          alt="arka plan görseli"
+          src={alintiBG}
+          className="absolute z-auto h-full w-full"
+        />
         {/* 2nd layer: image */}
         <div className="flex justify-center content-center absolute z-10 w-full h-full">
           <div className="absolute frame-border mt-6">
-            <img src={cover} className="h-min w-64" />
+            <img alt="kapak görseli" src={cover} className="h-min w-64" />
           </div>
         </div>
       </Card>

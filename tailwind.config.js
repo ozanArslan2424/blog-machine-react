@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const { nextui } = require("@nextui-org/react");
 
 /** @type {import('tailwindcss').Config} */

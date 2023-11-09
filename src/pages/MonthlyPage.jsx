@@ -25,18 +25,17 @@ export default function MonthlyPage() {
   return (
     <div className="flex responsive-flex justify-center gap-4 p-4 w-screen">
       <div className="flex flex-col gap-4">
-
-      <MonthlyBoard
-        uploadOne={handleGorselUpload("okuGorsel")}
-        uploadTwo={handleGorselUpload("dinleGorsel")}
-        uploadThree={handleGorselUpload("izleGorsel")}
-        onOkuBaslikChange={handleBaslikChange("okuBaslik")}
-        onDinleBaslikChange={handleBaslikChange("dinleBaslik")}
-        onIzleBaslikChange={handleBaslikChange("izleBaslik")}
-        onBonusBaslikChange={handleBaslikChange("bonusBaslik")}
-        onGenerateImages={handleGenerateImages}
-      />
-      <InfoCard />
+        <MonthlyBoard
+          uploadOne={handleGorselUpload("okuGorsel")}
+          uploadTwo={handleGorselUpload("dinleGorsel")}
+          uploadThree={handleGorselUpload("izleGorsel")}
+          onOkuBaslikChange={handleBaslikChange("okuBaslik")}
+          onDinleBaslikChange={handleBaslikChange("dinleBaslik")}
+          onIzleBaslikChange={handleBaslikChange("izleBaslik")}
+          onBonusBaslikChange={handleBaslikChange("bonusBaslik")}
+          onGenerateImages={handleGenerateImages}
+        />
+        <InfoCard />
       </div>
       <MonthlyPreviews {...state} ref={previewsRef} />
     </div>

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 import {
   forwardRef,
   useEffect,
@@ -9,7 +7,7 @@ import {
 } from "react";
 import { Card } from "@nextui-org/react";
 import { toJpeg } from "html-to-image";
-//images
+
 import Back from "/monthly/back-color.png";
 import CoverBG from "/monthly/cover.png";
 import TextBG from "/monthly/oneri-wbg.png";
@@ -36,7 +34,7 @@ const MonthlyPreviews = forwardRef(
           .then((dataUrl) => ({ dataUrl, index }))
           .catch((error) => {
             console.error("oops, something went wrong!", error);
-            return { error, index }; // Return an error object
+            return { error, index };
           })
       );
 
@@ -64,7 +62,7 @@ const MonthlyPreviews = forwardRef(
     const printCellRefs = useRef([]);
 
     useEffect(() => {
-      printCellRefs.current = printCellRefs.current.slice(0, 6); //take a look at this line
+      printCellRefs.current = printCellRefs.current.slice(0, 6);
     }, []);
 
     return (
@@ -142,7 +140,7 @@ const CoverPreviewCell = forwardRef(
         className="bg-white w-[430px] h-[500px]"
       >
         {/* 1st layer: back */}
-        <img src={Back} className={placement} />
+        <img alt="arka plan görseli" src={Back} className={placement} />
         {/* 2nd layer: images */}
         <img
           src={okuGorsel}
@@ -160,7 +158,7 @@ const CoverPreviewCell = forwardRef(
           className={`w-[118px] h-[113px] bottom-[109px] left-[282px] ${placement}`}
         />
         {/* 3rd layer: background image*/}
-        <img src={CoverBG} className={placement} />
+        <img alt="bölüm görselleri" src={CoverBG} className={placement} />
       </Card>
     );
   }
@@ -180,7 +178,7 @@ const OtherPreviewCell = forwardRef(
         className="bg-white w-[430px] h-[500px]"
       >
         {/* 1st layer: background image*/}
-        <img src={TextBG} className={placement} />
+        <img alt="arka plan görseli" src={TextBG} className={placement} />
         {/* 2nd layer: text */}
         {withTitle && (
           <span className="z-10 pt-6 pl-7 arial-font font-semibold text-black">
