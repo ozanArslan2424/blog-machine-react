@@ -5,7 +5,7 @@ export default function NavBar() {
   return (
     <nav className="flex justify-center mb-4">
       <Card radius="sm" className="flex-row">
-        <NavButton to="/">Akıl Defterim</NavButton>
+        <NavButton to="/default">Akıl Defterim</NavButton>
         <NavButton to="/ayin-onerileri">Ayın Önerileri</NavButton>
         <NavButton to="/alintilar">Gelecek: PsiNossa Alıntıları</NavButton>
       </Card>
