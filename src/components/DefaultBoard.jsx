@@ -85,8 +85,8 @@ export default function DefaultBoard({
         onPress={onGenerateImages}
       >
         <FontAwesomeIcon icon={faDownload} />
+        Bütün sayfaları yazdır.
       </Button>
-      Bütün sayfaları yazdır.
     </Card>
   );
 }
