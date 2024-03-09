@@ -7,7 +7,7 @@ export default function NavBar() {
       <Card radius="sm" className="flex-row">
         <NavButton to="/blogmachine/">Akıl Defterim</NavButton>
         <NavButton to="/blogmachine/ayin-onerileri">Ayın Önerileri</NavButton>
-        <NavButton to="/blogmachine/alintilar">Gelecek: PsiNossa Alıntıları</NavButton>
+        <NavButton to="/blogmachine/alintilar">PsiNossa Alıntıları</NavButton>
       </Card>
     </nav>
   );
