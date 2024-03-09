@@ -11,7 +11,7 @@ Control panels for the types of blog posts are on the left of the page and the p
 3. Enter text directly into the previews part,
 4. Download (*print*) when the design is completed.
 
-Just go to the [website] and start creating blog posts.
+You can go to the [website](https://ozanarslan2424.github.io/blogmachine-v2/) and start creating blog posts.
 
 ## Dependencies:
 - @fortawesome/fontawesome-svg-core: version 6.4.2
