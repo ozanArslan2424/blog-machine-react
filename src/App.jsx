@@ -35,9 +35,9 @@ function Layout() {
       <NavBar />
       <main>
         <Routes>
-          <Route path="/blogmachine/" element={<DefaultPage />} index />
-          <Route path="/blogmachine/ayin-onerileri" element={<MonthlyPage />} />
-          <Route path="/blogmachine/alintilar" element={<QuotesPage />} />
+          <Route path="/blogmachine-v2/" element={<DefaultPage />} index />
+          <Route path="/blogmachine-v2/ayin-onerileri" element={<MonthlyPage />} />
+          <Route path="/blogmachine-v2/alintilar" element={<QuotesPage />} />
         </Routes>
       </main>
       <Footer />
