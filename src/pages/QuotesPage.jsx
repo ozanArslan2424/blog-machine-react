@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import QuotesBoard from "../components/QuotesBoard";
 import QuotesPreviews from "../components/QuotesPreviews";
-import InfoCard from "../components/ui/InfoCard";
+import InfoCard from "../components/InfoCard";
 
 const QuotesPage = () => {
   const [cover, setCover] = useState(null);

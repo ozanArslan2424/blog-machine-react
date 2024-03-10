@@ -1,4 +1,4 @@
-import ThemeSwitch from "../components/ui/ThemeSwitch";
+import ThemeSwitch from "../components/ThemeSwitch";
 
 export default function Header({ headerTitle }) {
   return (
